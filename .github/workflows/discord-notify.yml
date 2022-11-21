@@ -1,0 +1,15 @@
+name: discord-notify
+on:
+  push:
+
+jobs:
+  discord-notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: sarisia/actions-status-discord@v1.10.0
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: "Push"
+          username: Github actions
+          avatar_url: "https://github.githubassets.com/images/modules/logos_page/Octocat.png"
