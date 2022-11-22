@@ -5,22 +5,15 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(InputModuleBase))]
-public class PlayerSwim : MonoBehaviour
+public class MovementPlayer : MonoBehaviour
 {
     InputModuleBase inputModule;
     CharacterController controller;
 
-    [SerializeField] Image waterEffect;
-
-    bool lastIGetMotionSick = false;
     [SerializeField] bool iGetMotionSick = false;
-
+    [SerializeField] Image waterEffect;
     [SerializeField] Transform visualModel;
     [SerializeField] Camera playerCamera;
-    bool _isInWater = false;
-    bool _lastIsInWater = false;
-    public bool isInWater { get => _isInWater; }
-
     [SerializeField] float hoverDistanceUnderWater = 1;
     [SerializeField] float smoothingDistance = 0.5f;
     [SerializeField] float smoothingTimer = 0.7f;
@@ -28,7 +21,21 @@ public class PlayerSwim : MonoBehaviour
     [SerializeField] float bobberSpeed = 1.25f;
     [SerializeField] float swimmingSpeed = 3;
 
+    public bool isInWater { get => _isInWater; }
+
     float cameraY = 0;
+    float bobberYOffset = 0;
+    float timer = 0;
+    float distancePW = 0;
+
+    bool requiresSmoothing = true;
+    bool canBobber = true;
+    bool lastIGetMotionSick = false;
+
+    bool _isInWater = false;
+    bool _lastIsInWater = false;
+
+    Vector3 movementThisFrame = Vector3.zero;
 
     void Start()
     {
@@ -39,57 +46,47 @@ public class PlayerSwim : MonoBehaviour
         _lastIsInWater = !_isInWater;
         if (playerCamera != null) cameraY = playerCamera.transform.localPosition.y;
     }
-    
+
     void Update()
     {
         if (WaterHandler.Instance == null) return;
         HandleWaterState();
         HandleCameraMovement();
+        HandleMovement();
+        HandleWaterOverlay();
+    }
 
-        Vector3 movementThisFrame = Vector3.zero;
-        if (waterEffect != null)
-            waterEffect.enabled = isInWater;
-
+    void HandleMovement()
+    {
+        movementThisFrame = Vector3.zero;
         if (!isInWater)
         {
             HandleWaterBobber();
-
-            movementThisFrame += transform.forward * (swimmingSpeed * inputModule.directionalInput.normalized.y * Time.deltaTime);
-            movementThisFrame += transform.right * (swimmingSpeed * inputModule.directionalInput.normalized.x * Time.deltaTime);
-            
+            Vector3 inputDirection = swimmingSpeed * inputModule.directionalInputNormalized * Time.deltaTime;
+            AddToMovement(transform.forward, inputDirection.y);
+            AddToMovement(transform.right, inputDirection.x);
             HandleMotionSickness();
         }
         else
         {
-            if (inputModule.directionalInput.y < 0)
-                movementThisFrame += transform.forward * ((swimmingSpeed / 3) * inputModule.directionalInput.y * Time.deltaTime);
-            else if (inputModule.directionalInput.y > 0)
-                movementThisFrame += playerCamera.transform.forward * (swimmingSpeed * inputModule.directionalInput.y * Time.deltaTime);
-            movementThisFrame += transform.right * ((swimmingSpeed / 3 * 2) * inputModule.directionalInput.x * Time.deltaTime);
-        }
+            float inputX = inputModule.directionalInput.x * Time.deltaTime;
+            float inputY = inputModule.directionalInput.y * Time.deltaTime;
+            float thirdSwimSpeed = swimmingSpeed / 3;
 
-        if (Input.GetKey(KeyCode.LeftControl))
-        {
-            movementThisFrame = new Vector3(movementThisFrame.x, -swimmingSpeed * Time.deltaTime, movementThisFrame.z);
-            canBobber = false;
-        }
-        else
-        {
-            canBobber = true;
+            if (inputModule.directionalInput.y < 0) AddToMovement(transform.forward, thirdSwimSpeed * inputY);
+            else if (inputModule.directionalInput.y > 0) AddToMovement(playerCamera.transform.forward, swimmingSpeed * inputY);
+
+            AddToMovement(transform.right, thirdSwimSpeed * 2 * inputX);
         }
 
 
-        if (Input.GetKey(KeyCode.Space))
-            movementThisFrame = new Vector3(movementThisFrame.x, swimmingSpeed * Time.deltaTime, movementThisFrame.z);
+        canBobber = !Input.GetButton(inputModule.diveInput);
 
-        
-
+        if (!canBobber)                     SetMovementY(-swimmingSpeed * Time.deltaTime);
+        if (Input.GetButton(inputModule.jumpInput))    SetMovementY(swimmingSpeed * Time.deltaTime);
 
         controller.Move(movementThisFrame);
-
-       
     }
-
     void HandleCameraMovement()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -105,8 +102,6 @@ public class PlayerSwim : MonoBehaviour
         controller.transform.Rotate(new Vector2(0, mouse.x), Space.Self);
         playerCamera.transform.Rotate(new Vector2(mouse.y, 0), Space.Self);
     }
-
-
     void HandleWaterState()
     {
         _isInWater = transform.position.y < hoveredWaterDistanceCompensated;
@@ -116,24 +111,6 @@ public class PlayerSwim : MonoBehaviour
             OnWaterStateToggle();
         }
     }
-
-
-    float distancePW = 0;
-    void OnWaterStateToggle()
-    {
-        if (!isInWater) 
-        {
-            timer = 0;
-            requiresSmoothing = true;
-            distancePW = hoveredWaterDistance - transform.position.y;
-        }
-    }
-    
-    float bobberYOffset = 0;
-    float timer;
-    bool requiresSmoothing = true;
-    bool canBobber = true;
-
     void HandleWaterBobber()
     {
         if (!canBobber) return;  
@@ -146,7 +123,6 @@ public class PlayerSwim : MonoBehaviour
         bobberYOffset = Mathf.Abs(bobberOffset * Mathf.Sin(timer));
         SetYAxis(hoveredWaterDistance - bobberYOffset);
     }
-
     void HandleSmoothedWaterBobber()
     {
         timer += Time.deltaTime;
@@ -158,7 +134,6 @@ public class PlayerSwim : MonoBehaviour
             timer = 0;
         }
     }
-
     void HandleMotionSickness()
     {
         if(lastIGetMotionSick != iGetMotionSick)
@@ -171,7 +146,24 @@ public class PlayerSwim : MonoBehaviour
         if (playerCamera == null) return;
         SetYAxis(playerCamera.transform, hoveredWaterDistance + cameraY - bobberOffset);
     }
+    void HandleWaterOverlay()
+    {
+        if (waterEffect != null)
+            waterEffect.enabled = isInWater;
+    }
 
+    void OnWaterStateToggle()
+    {
+        if (!isInWater)
+        {
+            timer = 0;
+            requiresSmoothing = true;
+            distancePW = hoveredWaterDistance - transform.position.y;
+        }
+    }
+
+    void AddToMovement(Vector3 direction, float power) => movementThisFrame += direction * power;
+    void SetMovementY(float y) => movementThisFrame = new Vector3(movementThisFrame.x, y, movementThisFrame.z);
     void SetYAxis(Transform obj, float yAxis) => obj.position = new Vector3(obj.position.x, yAxis, obj.position.z);
     void SetYAxis(float yAxis) => controller.Move(new Vector3(0,yAxis - controller.transform.position.y, 0));
     float hoveredWaterDistance => WaterHandler.Instance.waterLevel - hoverDistanceUnderWater;

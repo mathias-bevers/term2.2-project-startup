@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class InputModuleBase : MonoBehaviour
 {
+    [SerializeField] string _jumpInput;
+    [SerializeField] string _diveInput;
+    public string jumpInput { get => _jumpInput; }
+    public string diveInput { get => _diveInput; }
+
     protected Vector2 _directionalInput { get; set; }
     public Vector2 directionalInput { get => _directionalInput; }
 
@@ -12,7 +17,7 @@ public class InputModuleBase : MonoBehaviour
 
     public Vector2 directionalInputNormalized { get => directionalInput.normalized; }
     public Vector2 mouseInputNormalized { get => mouseInput.normalized; }
-
+    
     protected void Update()
     {
         HandleDirection();
@@ -25,9 +30,8 @@ public class InputModuleBase : MonoBehaviour
     bool hasSetDir = false;
     bool hasSetMouse = false;
 
-
+    protected virtual void RegisterDictionary() { }
     protected virtual void OnUpdate() { }
-
     protected virtual void HandleDirection() { }
     protected virtual void HandleMouse() { }
 
