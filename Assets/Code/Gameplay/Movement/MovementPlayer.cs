@@ -92,8 +92,12 @@ public class MovementPlayer : MonoBehaviour
 
         _controller.Move(movementThisFrame);
     }
-
     public void LookAtProper(Transform point)
+    {
+        LookAtProper(point, Vector3.zero);
+    }
+
+    public void LookAtProper(Transform point, Vector3 offset)
     {
         Vector3 direction = point.position - transform.position;
         Quaternion targetRot = Quaternion.LookRotation(direction);

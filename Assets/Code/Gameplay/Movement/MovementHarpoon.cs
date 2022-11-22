@@ -44,27 +44,8 @@ public class MovementHarpoon : MonoBehaviour
 
     private void Update()
     {
-        if(info != null)
-        {
-            harpoonTimer += Time.deltaTime;
-            if(harpoonTimer > info.entityHarpooned.canSurviveHarpoonTime)
-            {
-                harpoonTimer = 0;
-                info.harpoon.BreakHarpoon();
-                return;
-            }
-            player.enabled = false;
-            player.LookAtProper(info.entityHarpooned.transform);
-            //cam.playerCamera.transform.LookAt(info.entityHarpooned.transform);
-            if(info.entityHarpooned.harpoonType == HarpoonType.Player)
-            {
-                if (Input.GetButtonDown(input.harpoonInput))
-                    info.harpoon.BreakHarpoon();
-                if (Input.GetButton(input.harpoonShoot))
-                    Debug.Log("Pull in");
-            }
-            return;
-        }
+        if (HandleOnHarpoon()) return;
+
 
         HandleChargeup();
         if (timer < chargeUpTime) return;
@@ -75,12 +56,47 @@ public class MovementHarpoon : MonoBehaviour
             timer = 0;
             harpoonObject = Instantiate(harpoonPrefab, cam.playerCamera.transform.position, cam.playerCamera.transform.rotation);
             lastShotHarpoon = harpoonObject.GetComponent<Harpoon>();
-            if(lastShotHarpoon != null)
+            if (lastShotHarpoon != null)
             {
                 lastShotHarpoon.shotFrom = this;
             }
             Debug.Log("Shoot!");
         }
+    }
+
+    bool HandleOnHarpoon()
+    {
+        if (info == null) return false;
+
+        harpoonTimer += Time.deltaTime;
+        if (harpoonTimer > info.entityHarpooned.canSurviveHarpoonTime)
+        {
+            harpoonTimer = 0;
+            info.harpoon.BreakHarpoon();
+            return true;
+        }
+        player.enabled = false;
+        player.LookAtProper(info.harpoon.getShootPoint);
+
+        if (info.entityHarpooned.harpoonType == HarpoonType.Player)
+        {
+            if (Input.GetButtonDown(input.harpoonInput))
+                info.harpoon.BreakHarpoon();
+            if (Input.GetButton(input.harpoonShoot))
+            {
+                MovementPlayer cc = info.entityHarpooned.GetComponent<MovementPlayer>();
+                if (cc == null) return true;
+
+                cc.controller.Move(cc.cameraMovement.playerCamera.transform.forward * info.harpoon.harpoonStrength * Time.deltaTime);
+                if (cc.transform.position.y > WaterHandler.Instance.waterLevel)
+                    cc.controller.Move(new Vector3(0, -9.8f * Time.deltaTime, 0));
+                if (Vector3.Distance(info.entityHarpooned.transform.position, info.harpoonShooter.transform.position) < 3)
+                    info.harpoon.BreakHarpoon();
+
+            }
+        }
+        return true;
+
     }
 
     void HandleChargeup()
@@ -114,8 +130,8 @@ public class MovementHarpoon : MonoBehaviour
 
     bool HandleHarpoonMode()
     {
-        if (!shot)  player.enabled = !Input.GetButton(input.harpoonInput);
-        else        player.enabled = true;
+        if (!shot) player.enabled = !Input.GetButton(input.harpoonInput);
+        else player.enabled = true;
         return !player.enabled;
     }
 }

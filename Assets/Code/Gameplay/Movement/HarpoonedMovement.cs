@@ -8,6 +8,8 @@ public class HarpoonedMovement : HarpoonInfoRelay
 
     MovementPlayer player;
 
+    [SerializeField] float harpoonedSpeed = 1.5f;
+
     private void Start()
     {
         player = GetComponent<MovementPlayer>();
@@ -17,6 +19,11 @@ public class HarpoonedMovement : HarpoonInfoRelay
     private void Update()
     {
         if (info == null) return;
-        player.LookAtProper(info.harpoonShooter.transform);
+        player.LookAtProper(info.harpoon.shotFrom.transform);
+
+        Vector3 inputDirection = harpoonedSpeed * player.inputModule.directionalInputNormalized * Time.deltaTime;
+
+        player.controller.Move(transform.forward * inputDirection.y);
+        player.controller.Move(transform.right * inputDirection.x);
     }
 }

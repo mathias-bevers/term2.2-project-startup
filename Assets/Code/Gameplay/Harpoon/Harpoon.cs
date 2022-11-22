@@ -8,6 +8,10 @@ public class Harpoon : MonoBehaviour
 
     LineRenderer line;
     [SerializeField] float speed = 10;
+    [SerializeField] float _harpoonStrength = 3;
+
+    public float harpoonStrength { get => _harpoonStrength; }
+    public Transform getShootPoint { get => shootPoint; }
 
     [SerializeField] LayerMask mask;
 
