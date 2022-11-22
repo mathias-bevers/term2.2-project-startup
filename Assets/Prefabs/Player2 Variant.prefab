@@ -40,7 +40,7 @@ PrefabInstance:
     - target: {fileID: 4771910770764779289, guid: d4fdfb3e1043d2f49ad01c67eb0d14f5,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 119
+      value: 887
       objectReference: {fileID: 0}
     - target: {fileID: 4771910771869597430, guid: d4fdfb3e1043d2f49ad01c67eb0d14f5,
         type: 3}
@@ -75,12 +75,12 @@ PrefabInstance:
     - target: {fileID: 4771910771952252571, guid: d4fdfb3e1043d2f49ad01c67eb0d14f5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 21.06
+      value: 12.87
       objectReference: {fileID: 0}
     - target: {fileID: 4771910771952252571, guid: d4fdfb3e1043d2f49ad01c67eb0d14f5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -19.24
+      value: -4.93
       objectReference: {fileID: 0}
     - target: {fileID: 4771910771952252571, guid: d4fdfb3e1043d2f49ad01c67eb0d14f5,
         type: 3}
@@ -141,3 +141,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _jumpInput: JumpCtrl
   _diveInput: DiveCtrl
+  _harpoonInput: HarpoonCtrl
+  _harpoonShoot: HarpoonShootCtrl

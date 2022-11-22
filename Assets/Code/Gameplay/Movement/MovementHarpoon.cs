@@ -45,23 +45,21 @@ public class MovementHarpoon : MonoBehaviour
     private void Update()
     {
         if (HandleOnHarpoon()) return;
-
-
         HandleChargeup();
         if (timer < chargeUpTime) return;
+        ShootHarpoon();
+    }
 
-        if (Input.GetButtonDown(input.harpoonShoot))
-        {
-            shot = true;
-            timer = 0;
-            harpoonObject = Instantiate(harpoonPrefab, cam.playerCamera.transform.position, cam.playerCamera.transform.rotation);
-            lastShotHarpoon = harpoonObject.GetComponent<Harpoon>();
-            if (lastShotHarpoon != null)
-            {
-                lastShotHarpoon.shotFrom = this;
-            }
-            Debug.Log("Shoot!");
-        }
+    void ShootHarpoon()
+    {
+        if (!Input.GetButtonDown(input.harpoonShoot)) return;
+
+        shot = true;
+        timer = 0;
+        harpoonObject = Instantiate(harpoonPrefab, cam.playerCamera.transform.position, cam.playerCamera.transform.rotation);
+        lastShotHarpoon = harpoonObject.GetComponent<Harpoon>();
+        if (lastShotHarpoon != null)
+            lastShotHarpoon.shotFrom = this;
     }
 
     bool HandleOnHarpoon()
@@ -102,7 +100,8 @@ public class MovementHarpoon : MonoBehaviour
             if (cc.transform.position.y > WaterHandler.Instance.waterLevel)
                 cc.controller.Move(new Vector3(0, -9.8f * Time.deltaTime, 0));
 
-        }else if(info.getType == HarpoonType.Other)
+        }
+        else if (info.getType == HarpoonType.Other)
         {
             if (positive)
                 info.targetTransform.position = Vector3.MoveTowards(info.targetPos, info.shooterPos, harpoonStrenth);

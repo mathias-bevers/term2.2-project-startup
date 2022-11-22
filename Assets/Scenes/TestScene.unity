@@ -2965,7 +2965,7 @@ PrefabInstance:
     - target: {fileID: 4771910771952252571, guid: d4fdfb3e1043d2f49ad01c67eb0d14f5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.37
+      value: -9.87
       objectReference: {fileID: 0}
     - target: {fileID: 4771910771952252571, guid: d4fdfb3e1043d2f49ad01c67eb0d14f5,
         type: 3}
@@ -3011,14 +3011,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 892493815, guid: d8b3eb089f1a6c04ea357321d4030518, type: 3}
-      propertyPath: _harpoonInput
-      value: HarpoonCtrl
-      objectReference: {fileID: 0}
-    - target: {fileID: 892493815, guid: d8b3eb089f1a6c04ea357321d4030518, type: 3}
-      propertyPath: _harpoonShoot
-      value: HarpoonShootCtrl
-      objectReference: {fileID: 0}
     - target: {fileID: 443832682781855162, guid: d8b3eb089f1a6c04ea357321d4030518,
         type: 3}
       propertyPath: m_Name
@@ -3037,12 +3029,12 @@ PrefabInstance:
     - target: {fileID: 443832682781855163, guid: d8b3eb089f1a6c04ea357321d4030518,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 21.06
+      value: 12.87
       objectReference: {fileID: 0}
     - target: {fileID: 443832682781855163, guid: d8b3eb089f1a6c04ea357321d4030518,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -19.24
+      value: -4.93
       objectReference: {fileID: 0}
     - target: {fileID: 443832682781855163, guid: d8b3eb089f1a6c04ea357321d4030518,
         type: 3}
@@ -3077,11 +3069,6 @@ PrefabInstance:
     - target: {fileID: 443832682781855163, guid: d8b3eb089f1a6c04ea357321d4030518,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4904970751620365583, guid: d8b3eb089f1a6c04ea357321d4030518,
-        type: 3}
-      propertyPath: _harpoonType
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
