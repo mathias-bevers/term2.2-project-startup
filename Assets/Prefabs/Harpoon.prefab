@@ -49,9 +49,10 @@ MonoBehaviour:
   shotFrom: {fileID: 0}
   shootPoint: {fileID: 6357223053748661042}
   speed: 80
+  _harpoonStrength: 6
   mask:
     serializedVersion: 2
-    m_Bits: 243
+    m_Bits: 1011
 --- !u!120 &6357223052725863981
 LineRenderer:
   m_ObjectHideFlags: 0

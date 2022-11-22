@@ -67,6 +67,8 @@ public class MovementHarpoon : MonoBehaviour
     bool HandleOnHarpoon()
     {
         if (info == null) return false;
+        if (info.getType == HarpoonType.Break)
+            return BreakHarpoon();
 
         harpoonTimer += Time.deltaTime;
         if (harpoonTimer > info.entityHarpooned.canSurviveHarpoonTime)
@@ -78,25 +80,46 @@ public class MovementHarpoon : MonoBehaviour
         player.enabled = false;
         player.LookAtProper(info.harpoon.getShootPoint);
 
-        if (info.entityHarpooned.harpoonType == HarpoonType.Player)
+        if (Input.GetButtonDown(input.harpoonInput))
+            return BreakHarpoon();
+
+        if (Vector3.Distance(info.shooterPos, info.targetPos) < 3)
+            return BreakHarpoon();
+
+        if (!Input.GetButton(input.harpoonShoot))
+            return true;
+
+        float harpoonStrenth = (info.harpoon.harpoonStrength - info.entityHarpooned.getResistance) * Time.deltaTime;
+
+        bool positive = harpoonStrenth >= 0;
+
+        if (info.getType == HarpoonType.Player)
         {
-            if (Input.GetButtonDown(input.harpoonInput))
-                info.harpoon.BreakHarpoon();
-            if (Input.GetButton(input.harpoonShoot))
-            {
-                MovementPlayer cc = info.entityHarpooned.GetComponent<MovementPlayer>();
-                if (cc == null) return true;
+            MovementPlayer cc = info.entityHarpooned.GetComponent<MovementPlayer>();
+            if (cc == null) return true;
 
-                cc.controller.Move(cc.cameraMovement.playerCamera.transform.forward * info.harpoon.harpoonStrength * Time.deltaTime);
-                if (cc.transform.position.y > WaterHandler.Instance.waterLevel)
-                    cc.controller.Move(new Vector3(0, -9.8f * Time.deltaTime, 0));
-                if (Vector3.Distance(info.entityHarpooned.transform.position, info.harpoonShooter.transform.position) < 3)
-                    info.harpoon.BreakHarpoon();
+            cc.controller.Move(cc.cameraMovement.playerCamera.transform.forward * harpoonStrenth);
+            if (cc.transform.position.y > WaterHandler.Instance.waterLevel)
+                cc.controller.Move(new Vector3(0, -9.8f * Time.deltaTime, 0));
 
-            }
+        }else if(info.getType == HarpoonType.Other)
+        {
+            if (positive)
+                info.targetTransform.position = Vector3.MoveTowards(info.targetPos, info.shooterPos, harpoonStrenth);
+            else //for now we will break the harpoon
+                return BreakHarpoon();
         }
         return true;
 
+    }
+
+    bool BreakHarpoon()
+    {
+        if (info == null) return false;
+        if (info.harpoon == null) return false;
+        info.harpoon.BreakHarpoon();
+
+        return true;
     }
 
     void HandleChargeup()

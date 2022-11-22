@@ -309,7 +309,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 183
+    m_Bits: 951
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -578,6 +578,7 @@ MonoBehaviour:
   - {fileID: 2130314800}
   enableOnHit:
   - {fileID: 7489427104134807267}
+  harpoonResistance: 2.5
 --- !u!114 &2130314800
 MonoBehaviour:
   m_ObjectHideFlags: 0

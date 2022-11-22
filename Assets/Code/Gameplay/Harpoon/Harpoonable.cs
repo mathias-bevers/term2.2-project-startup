@@ -4,8 +4,7 @@ using UnityEngine;
 public enum HarpoonType
 {
     Player,
-    PullTowards,
-    PullAway,
+    Other,
     Break
 }
 
@@ -20,6 +19,9 @@ public class Harpoonable : MonoBehaviour
 
     [SerializeField] List<MonoBehaviour> disableOnHit;
     [SerializeField] List<MonoBehaviour> enableOnHit;
+
+    [SerializeField] float harpoonResistance = 1;
+    public float getResistance { get => harpoonResistance; }
 
     public void OnHit(HarpoonInfo info)
     {

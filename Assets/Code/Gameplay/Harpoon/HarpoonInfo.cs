@@ -1,3 +1,7 @@
+
+
+using UnityEngine;
+
 public class HarpoonInfo
 {
     Harpoonable _entityHarpooned;
@@ -13,4 +17,12 @@ public class HarpoonInfo
         _entityHarpooned = shotHit;
         _harpoonShooter = shotFrom; 
     }
+
+    public Vector3 shooterPos { get => shooterTransform.position; }
+    public Vector3 targetPos { get => targetTransform.position; }
+
+    public HarpoonType getType { get => entityHarpooned.harpoonType; }
+
+    public Transform shooterTransform { get => _harpoonShooter.transform; }
+    public Transform targetTransform { get => _entityHarpooned.transform; }
 }
