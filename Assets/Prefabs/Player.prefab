@@ -475,6 +475,10 @@ GameObject:
   - component: {fileID: 4771910771952252572}
   - component: {fileID: 4771910771952252573}
   - component: {fileID: 4771910771952252574}
+  - component: {fileID: 2130314799}
+  - component: {fileID: 2130314800}
+  - component: {fileID: 4350339192046736977}
+  - component: {fileID: 7489427104134807267}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -514,7 +518,6 @@ MonoBehaviour:
   iGetMotionSick: 0
   waterEffect: {fileID: 4771910770453559609}
   visualModel: {fileID: 4771910770491346464}
-  playerCamera: {fileID: 4771910770764779289}
   hoverDistanceUnderWater: 1
   smoothingDistance: 0.5
   smoothingTimer: 0.7
@@ -535,6 +538,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _jumpInput: JumpKeyboard
   _diveInput: DiveKeyboard
+  _harpoonInput: HarpoonKeyboard
+  _harpoonShoot: HarpoonShootKeyboard
 --- !u!143 &4771910771952252574
 CharacterController:
   m_ObjectHideFlags: 0
@@ -553,3 +558,66 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &2130314799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4771910771952252570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db944465d5eb2f7418b18c78f2a82cad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _harpoonType: 0
+  _hitOffset: {x: 0, y: 1, z: 0}
+  canSurviveHarpoonTime: 5
+  disableOnHit:
+  - {fileID: 4771910771952252572}
+  - {fileID: 2130314800}
+  enableOnHit:
+  - {fileID: 7489427104134807267}
+--- !u!114 &2130314800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4771910771952252570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c476c3678268ec4d8fce49a51049685, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  harpoonPrefab: {fileID: 6357223052725863970, guid: 61600c38bb86ecf4eb79f4042f86f2eb,
+    type: 3}
+  chargeUpTime: 0.7
+--- !u!114 &4350339192046736977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4771910771952252570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a3a8afee98ff8f4cb9163eaec3115fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerCamera: {fileID: 4771910770764779289}
+  fieldOfViewNormal: 80
+  fieldOfViewAimed: 50
+  zoomInLevel: 0
+--- !u!114 &7489427104134807267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4771910771952252570}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80340db2e4254a4da48dfbcd98a083e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

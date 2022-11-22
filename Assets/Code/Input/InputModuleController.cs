@@ -11,6 +11,6 @@ public class InputModuleController : InputModuleBase
 
     protected override void HandleMouse()
     {
-        base.HandleMouse(new Vector2(Input.GetAxisRaw("CameraX"), -Input.GetAxisRaw("CameraY")));
+        base.HandleMouse(new Vector2(Input.GetAxisRaw("CameraX") * 3, -Input.GetAxisRaw("CameraY") * 3));
     }
 }

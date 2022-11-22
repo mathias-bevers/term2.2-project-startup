@@ -6,8 +6,12 @@ public class InputModuleBase : MonoBehaviour
 {
     [SerializeField] string _jumpInput;
     [SerializeField] string _diveInput;
+    [SerializeField] string _harpoonInput;
+    [SerializeField] string _harpoonShoot;
     public string jumpInput { get => _jumpInput; }
     public string diveInput { get => _diveInput; }
+    public string harpoonInput { get => _harpoonInput; }
+    public string harpoonShoot { get => _harpoonShoot; }
 
     protected Vector2 _directionalInput { get; set; }
     public Vector2 directionalInput { get => _directionalInput; }

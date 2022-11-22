@@ -5,15 +5,16 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(InputModuleBase))]
+[RequireComponent(typeof(CameraMovement))]
 public class MovementPlayer : MonoBehaviour
 {
-    InputModuleBase inputModule;
-    CharacterController controller;
+    InputModuleBase _inputModule;
+    CharacterController _controller;
+    CameraMovement _cameraMovement;
 
     [SerializeField] bool iGetMotionSick = false;
     [SerializeField] Image waterEffect;
     [SerializeField] Transform visualModel;
-    [SerializeField] Camera playerCamera;
     [SerializeField] float hoverDistanceUnderWater = 1;
     [SerializeField] float smoothingDistance = 0.5f;
     [SerializeField] float smoothingTimer = 0.7f;
@@ -22,6 +23,9 @@ public class MovementPlayer : MonoBehaviour
     [SerializeField] float swimmingSpeed = 3;
 
     public bool isInWater { get => _isInWater; }
+    public InputModuleBase inputModule { get => _inputModule; }
+    public CharacterController controller { get => _controller; }
+    public CameraMovement cameraMovement { get => _cameraMovement; }
 
     float cameraY = 0;
     float bobberYOffset = 0;
@@ -39,12 +43,13 @@ public class MovementPlayer : MonoBehaviour
 
     void Start()
     {
-        controller = GetComponent<CharacterController>();
-        inputModule = GetComponent<InputModuleBase>();
+        _controller = GetComponent<CharacterController>();
+        _inputModule = GetComponent<InputModuleBase>();
+        _cameraMovement = GetComponent<CameraMovement>();
         if (WaterHandler.Instance == null) return;
         _isInWater = transform.position.y < hoveredWaterDistanceCompensated;
         _lastIsInWater = !_isInWater;
-        if (playerCamera != null) cameraY = playerCamera.transform.localPosition.y;
+        if (cameraMovement.playerCamera != null) cameraY = cameraMovement.playerCamera.transform.localPosition.y;
     }
 
     void Update()
@@ -62,45 +67,50 @@ public class MovementPlayer : MonoBehaviour
         if (!isInWater)
         {
             HandleWaterBobber();
-            Vector3 inputDirection = swimmingSpeed * inputModule.directionalInputNormalized * Time.deltaTime;
+            Vector3 inputDirection = swimmingSpeed * _inputModule.directionalInputNormalized * Time.deltaTime;
             AddToMovement(transform.forward, inputDirection.y);
             AddToMovement(transform.right, inputDirection.x);
             HandleMotionSickness();
         }
         else
         {
-            float inputX = inputModule.directionalInput.x * Time.deltaTime;
-            float inputY = inputModule.directionalInput.y * Time.deltaTime;
+            float inputX = _inputModule.directionalInput.x * Time.deltaTime;
+            float inputY = _inputModule.directionalInput.y * Time.deltaTime;
             float thirdSwimSpeed = swimmingSpeed / 3;
 
-            if (inputModule.directionalInput.y < 0) AddToMovement(transform.forward, thirdSwimSpeed * inputY);
-            else if (inputModule.directionalInput.y > 0) AddToMovement(playerCamera.transform.forward, swimmingSpeed * inputY);
+            if (_inputModule.directionalInput.y < 0) AddToMovement(transform.forward, thirdSwimSpeed * inputY);
+            else if (_inputModule.directionalInput.y > 0) AddToMovement(cameraMovement.playerCamera.transform.forward, swimmingSpeed * inputY);
 
             AddToMovement(transform.right, thirdSwimSpeed * 2 * inputX);
         }
 
 
-        canBobber = !Input.GetButton(inputModule.diveInput);
+        canBobber = !Input.GetButton(_inputModule.diveInput);
 
-        if (!canBobber)                     SetMovementY(-swimmingSpeed * Time.deltaTime);
-        if (Input.GetButton(inputModule.jumpInput))    SetMovementY(swimmingSpeed * Time.deltaTime);
+        if (!canBobber)                                                                                                     SetMovementY(-swimmingSpeed * Time.deltaTime);
+        if (Input.GetButton(_inputModule.jumpInput) && controller.transform.position.y < WaterHandler.Instance.waterLevel)  SetMovementY(swimmingSpeed * Time.deltaTime);
 
-        controller.Move(movementThisFrame);
+        _controller.Move(movementThisFrame);
+    }
+
+    public void LookAtProper(Transform point)
+    {
+        Vector3 direction = point.position - transform.position;
+        Quaternion targetRot = Quaternion.LookRotation(direction);
+        Quaternion slerpRot = Quaternion.Slerp(transform.rotation, targetRot, 10000 * Time.deltaTime);
+        float yRot = slerpRot.eulerAngles.y;
+        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, yRot, transform.rotation.eulerAngles.z);
+
+        Vector3 cameraDirection = point.position - cameraMovement.playerCamera.transform.position;
+        Quaternion targetRotCam = Quaternion.LookRotation(cameraDirection);
+        Quaternion camSlerpRot = Quaternion.Slerp(cameraMovement.playerCamera.transform.rotation, targetRotCam, 10000 * Time.deltaTime);
+        float xRot = camSlerpRot.eulerAngles.x;
+        cameraMovement.playerCamera.transform.rotation = Quaternion.Euler(xRot, cameraMovement.playerCamera.transform.rotation.eulerAngles.y, cameraMovement.playerCamera.transform.rotation.eulerAngles.z);
     }
     void HandleCameraMovement()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        cameraMovement.MoveCamera(_inputModule.mouseInput);
 
-        if (playerCamera == null) return;
-        Vector2 mouse = inputModule.mouseInput;
-
-        float xRot = playerCamera.transform.rotation.eulerAngles.x;
-        if (xRot >= 200 && xRot <= 360 && xRot < 285) if (mouse.y < 0) mouse.y = 0;
-        if (xRot >= 0 && xRot < 200 && xRot > 75) if (mouse.y > 0) mouse.y = 0;
-
-        controller.transform.Rotate(new Vector2(0, mouse.x), Space.Self);
-        playerCamera.transform.Rotate(new Vector2(mouse.y, 0), Space.Self);
     }
     void HandleWaterState()
     {
@@ -139,12 +149,12 @@ public class MovementPlayer : MonoBehaviour
         if(lastIGetMotionSick != iGetMotionSick)
         {
             lastIGetMotionSick = iGetMotionSick;
-            SetYAxis(playerCamera.transform, transform.position.y + cameraY);
+            SetYAxis(cameraMovement.playerCamera.transform, transform.position.y + cameraY);
         }
         if (!iGetMotionSick) return;
         if (requiresSmoothing) return;
-        if (playerCamera == null) return;
-        SetYAxis(playerCamera.transform, hoveredWaterDistance + cameraY - bobberOffset);
+        if (cameraMovement.playerCamera == null) return;
+        SetYAxis(cameraMovement.playerCamera.transform, hoveredWaterDistance + cameraY - bobberOffset);
     }
     void HandleWaterOverlay()
     {
@@ -165,7 +175,7 @@ public class MovementPlayer : MonoBehaviour
     void AddToMovement(Vector3 direction, float power) => movementThisFrame += direction * power;
     void SetMovementY(float y) => movementThisFrame = new Vector3(movementThisFrame.x, y, movementThisFrame.z);
     void SetYAxis(Transform obj, float yAxis) => obj.position = new Vector3(obj.position.x, yAxis, obj.position.z);
-    void SetYAxis(float yAxis) => controller.Move(new Vector3(0,yAxis - controller.transform.position.y, 0));
+    void SetYAxis(float yAxis) => _controller.Move(new Vector3(0,yAxis - _controller.transform.position.y, 0));
     float hoveredWaterDistance => WaterHandler.Instance.waterLevel - hoverDistanceUnderWater;
     float hoveredWaterDistanceCompensated => hoveredWaterDistance - smoothingDistance;
 }
