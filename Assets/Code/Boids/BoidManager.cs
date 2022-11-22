@@ -7,16 +7,19 @@ namespace Code.Boids
 {
 	public class BoidManager : MonoBehaviour
 	{
+		[SerializeField] private Transform target;
+
 		const int threadGroupSize = 1024;
 
 		public BoidSettings settings;
 		public ComputeShader compute;
+
 		Boid[] boids;
 
 		void Start()
 		{
 			boids = FindObjectsOfType<Boid>();
-			foreach (Boid b in boids) { b.Initialize(settings, null); }
+			foreach (Boid b in boids) { b.Initialize(settings, target); }
 
 		}
 
