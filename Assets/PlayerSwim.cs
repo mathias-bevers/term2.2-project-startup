@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(InputModuleBase))]
@@ -8,6 +9,8 @@ public class PlayerSwim : MonoBehaviour
 {
     InputModuleBase inputModule;
     CharacterController controller;
+
+    [SerializeField] Image waterEffect;
 
     bool lastIGetMotionSick = false;
     [SerializeField] bool iGetMotionSick = false;
@@ -44,6 +47,8 @@ public class PlayerSwim : MonoBehaviour
         HandleCameraMovement();
 
         Vector3 movementThisFrame = Vector3.zero;
+        if (waterEffect != null)
+            waterEffect.enabled = isInWater;
 
         if (!isInWater)
         {
