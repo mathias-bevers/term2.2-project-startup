@@ -23,6 +23,7 @@ public class PlayerSwim : MonoBehaviour
     [SerializeField] float smoothingTimer = 0.7f;
     [SerializeField] float bobberOffset = 0.2f;
     [SerializeField] float bobberSpeed = 1.25f;
+    [SerializeField] float swimmingSpeed = 3;
 
     float cameraY = 0;
 
@@ -42,17 +43,46 @@ public class PlayerSwim : MonoBehaviour
         HandleWaterState();
         HandleCameraMovement();
 
+        Vector3 movementThisFrame = Vector3.zero;
+
         if (!isInWater)
         {
             HandleWaterBobber();
 
-
-
+            movementThisFrame += transform.forward * (swimmingSpeed * inputModule.directionalInput.normalized.y * Time.deltaTime);
+            movementThisFrame += transform.right * (swimmingSpeed * inputModule.directionalInput.normalized.x * Time.deltaTime);
+            
             HandleMotionSickness();
         }
+        else
+        {
+            if (inputModule.directionalInput.y < 0)
+                movementThisFrame += transform.forward * ((swimmingSpeed / 3) * inputModule.directionalInput.y * Time.deltaTime);
+            else if (inputModule.directionalInput.y > 0)
+                movementThisFrame += playerCamera.transform.forward * (swimmingSpeed * inputModule.directionalInput.y * Time.deltaTime);
+            movementThisFrame += transform.right * ((swimmingSpeed / 3 * 2) * inputModule.directionalInput.x * Time.deltaTime);
+        }
+
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            movementThisFrame = new Vector3(movementThisFrame.x, -swimmingSpeed * Time.deltaTime, movementThisFrame.z);
+            canBobber = false;
+        }
+        else
+        {
+            canBobber = true;
+        }
+
+
+        if (Input.GetKey(KeyCode.Space))
+            movementThisFrame = new Vector3(movementThisFrame.x, swimmingSpeed * Time.deltaTime, movementThisFrame.z);
+
         
-        controller.Move(transform.forward * (3 * inputModule.directionalInput.y * Time.deltaTime));
-        controller.Move(transform.right * (3 * inputModule.directionalInput.x * Time.deltaTime));
+
+
+        controller.Move(movementThisFrame);
+
+       
     }
 
     void HandleCameraMovement()
@@ -97,10 +127,11 @@ public class PlayerSwim : MonoBehaviour
     float bobberYOffset = 0;
     float timer;
     bool requiresSmoothing = true;
-    
+    bool canBobber = true;
+
     void HandleWaterBobber()
     {
-       
+        if (!canBobber) return;  
         if (requiresSmoothing)
         {
             HandleSmoothedWaterBobber();
