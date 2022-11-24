@@ -11,10 +11,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Player1
+  - Player2
+  - Boids/Obstacle
+  - Boids/Boid
   - 
   - 
   - 
