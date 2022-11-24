@@ -152,8 +152,8 @@ public class MovementHarpoon : MonoBehaviour
 
     bool HandleHarpoonMode()
     {
-        if (!shot) player.enabled = !Input.GetButton(input.actionButton1);
-        else player.enabled = true;
+        //if (!shot) player.enabled = !Input.GetButton(input.actionButton1);
+        //else player.enabled = true;
         return !player.enabled;
     }
 }

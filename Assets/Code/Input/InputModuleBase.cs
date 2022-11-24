@@ -22,7 +22,7 @@ public class InputModuleBase : MonoBehaviour
     public string cameraAxisVertical { get => _cameraAxisVertical; }
 
     protected Vector2 _directionalInput { get; set; }
-    public Vector2 directionalInput { get => _directionalInput; }
+    public Vector2 directionalInput { get => ClampedDirInput(); }
 
     protected Vector2 _mouseInput { get; set; }
     public Vector2 mouseInput { get => _mouseInput; }
@@ -30,6 +30,14 @@ public class InputModuleBase : MonoBehaviour
     public Vector2 directionalInputNormalized { get => directionalInput.normalized; }
     public Vector2 mouseInputNormalized { get => mouseInput.normalized; }
     
+    Vector2 ClampedDirInput()
+    {
+        Vector2 vec = _directionalInput;
+        if (vec.magnitude > 1)
+            vec = _directionalInput.normalized;
+        return vec;
+    }
+
     protected void Update()
     {
         HandleDirection();

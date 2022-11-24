@@ -24,9 +24,19 @@ public class CameraRig : MonoBehaviour
     [Header("Camera Collision Settings")]
     [SerializeField] float collisionSize = 1;
     [SerializeField] LayerMask cameraCollidesWith;
-
+    [HideInInspector] public Vector3 forward => transform.forward;
 
     float currentDistance = 10;
+
+    public void PassThroughInput(Vector2 cameraInput, MouseSettings mouseSettings)
+    {
+        Vector2 input = new Vector2(cameraInput.x * mouseSettings.sensitivityX * mouseSettings.invertX, cameraInput.y * mouseSettings.sensitivityY * mouseSettings.invertY) * Time.deltaTime;
+        float xRot = transform.rotation.eulerAngles.x;
+        if (xRot >= 200 && xRot <= 360 && xRot < 315) if (input.y < 0) input.y = 0;
+        if (xRot >= 0 && xRot < 200 && xRot > 60) if (input.y > 0) input.y = 0;
+        transform.Rotate(new Vector2(input.y, 0), Space.Self);
+        transform.Rotate(new Vector2(0, input.x), Space.World);
+    }
 
     private void Start()
     {
