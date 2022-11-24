@@ -1,4 +1,4 @@
 ﻿namespace Code
 {
-	public class Killer : Entity { }
+	public class Killer : ControlableEntity { }
 }

@@ -2,7 +2,7 @@
 
 namespace Code
 {
-	public class Entity : MonoBehaviour
+	public class MoveableEntity : Entity
 	{
 		
 	}

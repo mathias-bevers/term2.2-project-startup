@@ -1,4 +1,4 @@
 ﻿namespace Code
 {
-	public class Survivor : Entity { }
+	public class Survivor : ControlableEntity { }
 }
