@@ -11,6 +11,8 @@ public class InputModuleController : InputModuleBase
 
     protected override void HandleMouse()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         base.HandleMouse(new Vector2(Input.GetAxisRaw(cameraAxisHorizontal) * 3, -Input.GetAxisRaw(cameraAxisVertical) * 3));
     }
 }

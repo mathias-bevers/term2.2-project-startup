@@ -29,7 +29,13 @@ public class InputModuleBase : MonoBehaviour
 
     public Vector2 directionalInputNormalized { get => directionalInput.normalized; }
     public Vector2 mouseInputNormalized { get => mouseInput.normalized; }
-    
+
+    float _directionAngle;
+    public float directionAngle { get => _directionAngle; }
+
+    float _mouseAngle;
+    public float mouseAngle { get => _mouseAngle; }
+
     Vector2 ClampedDirInput()
     {
         Vector2 vec = _directionalInput;
@@ -58,12 +64,22 @@ public class InputModuleBase : MonoBehaviour
     protected void HandleDirection(Vector2 outcome)
     {
         _directionalInput = outcome;
+        SetAngle(ref _directionAngle, outcome);
         hasSetDir = true;
+    }
+
+    void SetAngle(ref float angle,Vector2 input)
+    {
+        Vector3 to = new Vector3(-input.x, 0, input.y);
+        angle = Vector3.Angle(Vector3.forward, to);
+        Vector3 cross = Vector3.Cross(Vector3.forward, to);
+        if (cross.y > 0) angle = -angle;
     }
 
     protected void HandleMouse(Vector2 outcome)
     {
         _mouseInput = outcome;
+        SetAngle(ref _mouseAngle, outcome);
         hasSetMouse = true;
     }
 }

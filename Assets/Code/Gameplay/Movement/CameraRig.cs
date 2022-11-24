@@ -72,7 +72,7 @@ public class CameraRig : MonoBehaviour
         this.hitPoint = hitPoint;
 #endif
 
-        rigData.camera.transform.position = hitPoint;
+        rigData.cameraHolder.position = hitPoint;
         return currentDistance < minDistance;
     }
 
