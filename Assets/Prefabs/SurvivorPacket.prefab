@@ -40,6 +40,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1295625781590415837}
     m_Modifications:
+    - target: {fileID: 731575691144872476, guid: 84b7ebd6c26cc4e4ab5bc995308e4f10,
+        type: 3}
+      propertyPath: m_TargetDisplay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 731575691937816156, guid: 84b7ebd6c26cc4e4ab5bc995308e4f10,
         type: 3}
       propertyPath: m_Name
@@ -162,6 +167,56 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1295625781590415837}
     m_Modifications:
+    - target: {fileID: 8170256149282086976, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
+      propertyPath: m_SlopeLimit
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170256149282086976, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
+      propertyPath: m_StepOffset
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170256149282086978, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
+      propertyPath: _diveInput
+      value: DiveCtrl
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170256149282086978, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
+      propertyPath: _jumpInput
+      value: JumpCtrl
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170256149282086978, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
+      propertyPath: _actionButton1
+      value: HarpoonCtrl
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170256149282086978, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
+      propertyPath: _actionButton2
+      value: HarpoonShootCtrl
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170256149282086978, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
+      propertyPath: _cameraAxisVertical
+      value: CameraY
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170256149282086978, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
+      propertyPath: _cameraAxisHorizontal
+      value: CameraX
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170256149282086978, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
+      propertyPath: _movementAxisVertical
+      value: VerticalJoy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170256149282086978, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
+      propertyPath: _movementAxisHorizontal
+      value: HorizontalJoy
+      objectReference: {fileID: 0}
     - target: {fileID: 8170256149282086988, guid: f471a9dbf54b0004abc54899d58db0a8,
         type: 3}
       propertyPath: m_Name
