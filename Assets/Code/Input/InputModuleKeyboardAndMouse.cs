@@ -6,11 +6,11 @@ public class InputModuleKeyboardAndMouse : InputModuleBase
 {
     protected override void HandleDirection()
     {
-        base.HandleDirection(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+        base.HandleDirection(new Vector2(Input.GetAxisRaw(movementAxisHorizontal), Input.GetAxisRaw(movementAxisVertical)));
     }
 
     protected override void HandleMouse()
     {
-        base.HandleMouse(new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y")));
+        base.HandleMouse(new Vector2(Input.GetAxisRaw(cameraAxisHorizontal) * 3, -Input.GetAxisRaw(cameraAxisVertical) * 3));
     }
 }

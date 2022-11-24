@@ -52,7 +52,7 @@ public class MovementHarpoon : MonoBehaviour
 
     void ShootHarpoon()
     {
-        if (!Input.GetButtonDown(input.harpoonShoot)) return;
+        if (!Input.GetButtonDown(input.actionButton2)) return;
 
         shot = true;
         timer = 0;
@@ -78,13 +78,13 @@ public class MovementHarpoon : MonoBehaviour
         player.enabled = false;
         player.LookAtProper(info.harpoon.getShootPoint);
 
-        if (Input.GetButtonDown(input.harpoonInput))
+        if (Input.GetButtonDown(input.actionButton1))
             return BreakHarpoon();
 
         if (Vector3.Distance(info.shooterPos, info.targetPos) < 3)
             return BreakHarpoon();
 
-        if (!Input.GetButton(input.harpoonShoot))
+        if (!Input.GetButton(input.actionButton2))
             return true;
 
         float harpoonStrenth = (info.harpoon.harpoonStrength - info.entityHarpooned.getResistance) * Time.deltaTime;
@@ -152,7 +152,7 @@ public class MovementHarpoon : MonoBehaviour
 
     bool HandleHarpoonMode()
     {
-        if (!shot) player.enabled = !Input.GetButton(input.harpoonInput);
+        if (!shot) player.enabled = !Input.GetButton(input.actionButton1);
         else player.enabled = true;
         return !player.enabled;
     }

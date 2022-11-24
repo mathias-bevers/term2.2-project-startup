@@ -536,10 +536,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65bb345e345e8ea45b104fcf49205773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _movementAxisHorizontal: Horizontal
+  _movementAxisVertical: Vertical
+  _cameraAxisHorizontal: Mouse X
+  _cameraAxisVertical: Mouse Y
   _jumpInput: JumpKeyboard
   _diveInput: DiveKeyboard
-  _harpoonInput: HarpoonKeyboard
-  _harpoonShoot: HarpoonShootKeyboard
+  _actionButton1: 
+  _actionButton2: 
 --- !u!143 &4771910771952252574
 CharacterController:
   m_ObjectHideFlags: 0

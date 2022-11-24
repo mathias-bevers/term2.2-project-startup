@@ -22,6 +22,7 @@ public class MovementPlayer : MonoBehaviour
     [SerializeField] float bobberSpeed = 1.25f;
     [SerializeField] float swimmingSpeed = 3;
 
+
     public bool isInWater { get => _isInWater; }
     public InputModuleBase inputModule { get => _inputModule; }
     public CharacterController controller { get => _controller; }

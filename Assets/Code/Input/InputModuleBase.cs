@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class InputModuleBase : MonoBehaviour
 {
+    [SerializeField] string _movementAxisHorizontal;
+    [SerializeField] string _movementAxisVertical;
+    [SerializeField] string _cameraAxisHorizontal;
+    [SerializeField] string _cameraAxisVertical;
     [SerializeField] string _jumpInput;
     [SerializeField] string _diveInput;
-    [SerializeField] string _harpoonInput;
-    [SerializeField] string _harpoonShoot;
+    [SerializeField] string _actionButton1;
+    [SerializeField] string _actionButton2;
     public string jumpInput { get => _jumpInput; }
     public string diveInput { get => _diveInput; }
-    public string harpoonInput { get => _harpoonInput; }
-    public string harpoonShoot { get => _harpoonShoot; }
+    public string actionButton1 { get => _actionButton1; }
+    public string actionButton2 { get => _actionButton2; }
+    public string movementAxisHorizontal { get => _movementAxisHorizontal; }
+    public string movementAxisVertical { get => _movementAxisVertical; }
+    public string cameraAxisHorizontal { get => _cameraAxisHorizontal; }
+    public string cameraAxisVertical { get => _cameraAxisVertical; }
 
     protected Vector2 _directionalInput { get; set; }
     public Vector2 directionalInput { get => _directionalInput; }
