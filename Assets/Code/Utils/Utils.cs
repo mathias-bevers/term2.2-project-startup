@@ -39,4 +39,6 @@ public static class Utils {
 	
     public static string StyleEndCharacter(Color color, string toColor) => $"<color=#{ColorUtility.ToHtmlStringRGB(color)}>{toColor}</color>";
 
+	public static string Color(this string toColor, Color color) => $"<color=#{ColorUtility.ToHtmlStringRGB(color)}>{toColor}</color>";
+
 }

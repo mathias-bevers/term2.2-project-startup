@@ -8,7 +8,7 @@ namespace Code
 	{
 		protected override void Pickup(InteractionHandler handler)
 		{
-			if (handler.inventory.Any(pickupable => pickupable.GetType() == typeof(Key)))
+			if (handler.hasKey)
 			{
 				Debug.LogWarning($"{handler.gameObject.name} already has a key in its inventory");
 				return;

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Code.Interaction
@@ -7,12 +8,13 @@ namespace Code.Interaction
 	//Idea: make split up interaction / unclockers. 
 	public class InteractionHandler : MonoBehaviour
 	{
-		[SerializeField] private float reach = 5.0f;
-		[SerializeField] private LayerMask interactableMask;
+		[SerializeField] private float reach = 3f;
 
-		public bool hasUnlocker { get; protected set; }
+		public bool hasKey => inventory.Any(item => item.GetType() == typeof(Key));
 
 		public List<Pickupable> inventory { get; } = new();
+		private bool canInteract = false;
+		private Camera cam; //TODO: remove when survivor has cameraRig.
 		private ControlableEntity controlableEntity;
 		private Transform cachedTransform;
 
@@ -20,18 +22,30 @@ namespace Code.Interaction
 		{
 			cachedTransform = transform;
 			controlableEntity = GetComponent<ControlableEntity>();
+			cam = GetComponentInChildren<Camera>();
 		}
 
 		public void FixedUpdate()
 		{
-			Ray ray = new(cachedTransform.position, controlableEntity.cameraRig.forward);
+			canInteract = false;
 
-			if (!Physics.Raycast(ray, out RaycastHit hit, reach, interactableMask)) { return; }
+			Debug.DrawRay(cam.transform.position, cam.transform.forward * reach, Color.cyan);
 
-			if (!Input.GetKeyDown(KeyCode.E)) { return; } //TODO: integrate with InputModules.
+			Ray ray = new(cam.transform.position, cam.transform.forward); //TODO: replace with cameraRig.Forward
+			if (!Physics.Raycast(ray, out RaycastHit hit, reach)) { return; }
+
+			canInteract = true;
+
+			if (!Input.GetKey(KeyCode.E)) { return; } //TODO: integrate with InputModules.
+
 
 			IInteractable interactable = hit.transform.GetComponent<IInteractable>();
 			interactable?.Interact(this);
+		}
+
+		private void OnGUI()
+		{
+			GUI.Label(new Rect(10, 10, 500, 100), "Can interact " + (canInteract ? "yes".Color(Color.green) : "no".Color(Color.red)));
 		}
 	}
 }
