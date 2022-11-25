@@ -88,6 +88,8 @@ public class MovementModuleSurvivor : MovementModuleControlled
         if (!canBobber) SetMovementY(-swimmingSpeed * Time.deltaTime);
         if (Input.GetButton(inputModule.jumpInput) && controller.transform.position.y < WaterHandler.Instance.waterLevel) SetMovementY(swimmingSpeed * Time.deltaTime);
 
+
+       // Move(movementThisFrame, movementThisFrame.magnitude);
         controller.Move(movementThisFrame);
     }
     void HandleMovementOutOfWater()

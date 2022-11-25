@@ -50,24 +50,22 @@ public class MovementModuleShark : MovementModuleControlled
     private void Move()
     {
         speed = Mathf.Clamp(speed += (inputDirection.magnitude > 0.1f ? acceleration : -deceleration) * Time.deltaTime, -0.1f, maxSpeed);
-        if (speed > 0)
-        {
-            Quaternion angleQuat = Quaternion.AngleAxis(lastAngle, Vector3.up);
-            Quaternion angleForwardQuat = Quaternion.AngleAxis(lastAngleX, Vector3.right);
-            Quaternion actualQuat = angleQuat * angleForwardQuat;
-            Quaternion quat = Quaternion.RotateTowards(_transform.rotation, actualQuat, maxRotationSpeed * Time.deltaTime);
-            quat.eulerAngles = new Vector3(quat.eulerAngles.x, quat.eulerAngles.y, 0);
-            _transform.rotation = quat;
+        if (speed < 0) return;
 
-            Vector3 movement = _transform.forward;
+        Quaternion angleQuat = Quaternion.AngleAxis(lastAngle, Vector3.up);
+        Quaternion angleForwardQuat = Quaternion.AngleAxis(lastAngleX, Vector3.right);
+        Quaternion actualQuat = angleQuat * angleForwardQuat;
+        Quaternion quat = Quaternion.RotateTowards(_transform.rotation, actualQuat, maxRotationSpeed * Time.deltaTime);
+        quat.eulerAngles = new Vector3(quat.eulerAngles.x, quat.eulerAngles.y, 0);
+        _transform.rotation = quat;
 
-            if(_transform.position.y + movement.y > WaterHandler.Instance.waterLevel - killer.maxUnderwater)
-            {
-                movement.y = 0;
-            }
-            controller.Move(movement * Time.deltaTime * speed);
+        Vector3 movement = _transform.forward;
 
-        }
+        if (_transform.position.y + movement.y > WaterHandler.Instance.waterLevel - killer.maxUnderwater)
+            movement.y = 0;
 
+        //Move(movement, speed);
+
+        controller.Move(movement * Time.deltaTime * speed);
     }
 }

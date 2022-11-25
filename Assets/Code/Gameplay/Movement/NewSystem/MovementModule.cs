@@ -30,4 +30,10 @@ public class MovementModule : MonoBehaviour
     {
         
     }
+
+
+    internal void Move(Vector3 direction, float speed)
+    {
+        controller?.Move(direction.normalized * speed * Time.deltaTime);
+    }
 }

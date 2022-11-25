@@ -626,4 +626,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80340db2e4254a4da48dfbcd98a083e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  harpoonedSpeed: 1
+  harpoonedSpeed: 2.5
