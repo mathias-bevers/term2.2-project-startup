@@ -179,6 +179,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8170256149282086978, guid: f471a9dbf54b0004abc54899d58db0a8,
         type: 3}
+      propertyPath: _settings
+      value: 
+      objectReference: {fileID: 11400000, guid: 7e14c62903c4a0f44a446f8ee940942d,
+        type: 2}
+    - target: {fileID: 8170256149282086978, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
       propertyPath: _diveInput
       value: DiveCtrl
       objectReference: {fileID: 0}

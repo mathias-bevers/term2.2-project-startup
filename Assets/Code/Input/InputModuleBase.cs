@@ -4,22 +4,15 @@ using UnityEngine;
 
 public class InputModuleBase : MonoBehaviour
 {
-    [SerializeField] string _movementAxisHorizontal;
-    [SerializeField] string _movementAxisVertical;
-    [SerializeField] string _cameraAxisHorizontal;
-    [SerializeField] string _cameraAxisVertical;
-    [SerializeField] string _jumpInput;
-    [SerializeField] string _diveInput;
-    [SerializeField] string _actionButton1;
-    [SerializeField] string _actionButton2;
-    public string jumpInput { get => _jumpInput; }
-    public string diveInput { get => _diveInput; }
-    public string actionButton1 { get => _actionButton1; }
-    public string actionButton2 { get => _actionButton2; }
-    public string movementAxisHorizontal { get => _movementAxisHorizontal; }
-    public string movementAxisVertical { get => _movementAxisVertical; }
-    public string cameraAxisHorizontal { get => _cameraAxisHorizontal; }
-    public string cameraAxisVertical { get => _cameraAxisVertical; }
+    [SerializeField] InputSettings _settings;
+    public string jumpInput { get => _settings.jumpInput; }
+    public string diveInput { get => _settings.diveInput; }
+    public string actionButton1 { get => _settings.actionInput1; }
+    public string actionButton2 { get => _settings.actionInput2; }
+    public string movementAxisHorizontal { get => _settings.horizontalMovement; }
+    public string movementAxisVertical { get => _settings.verticalMovement; }
+    public string cameraAxisHorizontal { get => _settings.horizontalCamera; }
+    public string cameraAxisVertical { get => _settings.verticalCamera; }
 
     protected Vector2 _directionalInput { get; set; }
     public Vector2 directionalInput { get => ClampedDirInput(); }
