@@ -3,6 +3,7 @@ using UnityEngine;
 namespace Code
 {
 	[RequireComponent(typeof(InputModuleBase))]
+    [RequireComponent(typeof(MovementModuleControlled))]
 
 	public class ControlableEntity : MoveableEntity
 	{

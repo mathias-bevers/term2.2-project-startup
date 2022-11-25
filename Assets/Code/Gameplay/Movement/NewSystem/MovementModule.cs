@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class MovementModule : MonoBehaviour
 {
-    public CharacterController controller;
+    public CharacterController controller { get; set; }
 
     internal bool hasController { get; private set; }
 

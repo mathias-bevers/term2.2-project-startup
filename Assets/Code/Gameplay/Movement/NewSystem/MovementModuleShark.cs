@@ -8,11 +8,17 @@ public class MovementModuleShark : MovementModuleControlled
 {
     [SerializeField] float maxSpeed = 10f;
     [SerializeField] float acceleration = 3f;
+    [SerializeField] float deceleration = 5f;
     [SerializeField] float maxRotationSpeed = 150;
     Vector2 inputDirection = Vector2.zero;
     Killer killer;
 
     Transform _transform => controller.transform;
+
+    float speed = 0;
+
+    float lastAngle = 0;
+    float lastAngleX = 0;
 
     protected override void OnStart()
     {
@@ -34,22 +40,32 @@ public class MovementModuleShark : MovementModuleControlled
         if (!hasInputModule) return;
         inputDirection = inputModule.directionalInput;
 
+        if (inputDirection.magnitude > 0.1f)
+        {
+            lastAngle = inputModule.directionAngle + killer.cameraRig.transform.eulerAngles.y;
+            lastAngleX = killer.cameraRig.transform.localEulerAngles.x;
+        }
     }
 
     private void Move()
     {
-        Vector3 direction = killer.cameraRig.forward;
-        if(_transform.position.y > WaterHandler.Instance.waterLevel - killer.maxUnderwater)
-            if(direction.y > 0)
-                direction = new Vector3(direction.x, 0, direction.z);
-
-        if (inputDirection.magnitude > 0)
+        speed = Mathf.Clamp(speed += (inputDirection.magnitude > 0.1f ? acceleration : -deceleration) * Time.deltaTime, -0.1f, maxSpeed);
+        if (speed > 0)
         {
-            Quaternion quat = Quaternion.RotateTowards(_transform.rotation, Quaternion.Euler(direction), maxRotationSpeed * Time.deltaTime);
+            Quaternion angleQuat = Quaternion.AngleAxis(lastAngle, Vector3.up);
+            Quaternion angleForwardQuat = Quaternion.AngleAxis(lastAngleX, Vector3.right);
+            Quaternion actualQuat = angleQuat * angleForwardQuat;
+            Quaternion quat = Quaternion.RotateTowards(_transform.rotation, actualQuat, maxRotationSpeed * Time.deltaTime);
+            quat.eulerAngles = new Vector3(quat.eulerAngles.x, quat.eulerAngles.y, 0);
             _transform.rotation = quat;
 
+            Vector3 movement = _transform.forward;
 
-            controller.Move(_transform.forward * Time.deltaTime * maxSpeed);
+            if(_transform.position.y + movement.y > WaterHandler.Instance.waterLevel - killer.maxUnderwater)
+            {
+                movement.y = 0;
+            }
+            controller.Move(movement * Time.deltaTime * speed);
 
         }
 
