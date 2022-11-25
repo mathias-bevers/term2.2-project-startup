@@ -11,7 +11,8 @@ namespace Code
 
         public CameraRig cameraRig { get => _cameraRig; }
 
-        protected InputModuleBase inputModule;
+        protected InputModuleBase _inputModule;
+        public InputModuleBase inputModule { get => _inputModule; }
 
         [SerializeField] MouseSettings mouseSettings;
 
@@ -21,9 +22,9 @@ namespace Code
         protected override void OnStart()
         {
             base.OnStart();
-            inputModule = GetComponent<InputModuleBase>();
+            _inputModule = GetComponent<InputModuleBase>();
             movementModule = GetComponent<MovementModuleControlled>();
-            movementModule.inputModule = inputModule;
+            movementModule.inputModule = _inputModule;
 
         }
 
@@ -39,7 +40,7 @@ namespace Code
         void HandleCameraMovement()
         {
             if (_cameraRig == null) return;
-            _cameraRig.PassThroughInput(inputModule.mouseInput, mouseSettings);
+            _cameraRig.PassThroughInput(_inputModule.mouseInput, mouseSettings);
         }
     }
 }

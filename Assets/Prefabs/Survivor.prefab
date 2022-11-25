@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8170256149282086990}
   - component: {fileID: 8170256149282086978}
   - component: {fileID: 8170256149282086979}
+  - component: {fileID: 753550746220902194}
   m_Layer: 7
   m_Name: Survivor
   m_TagString: Untagged
@@ -113,6 +114,19 @@ MonoBehaviour:
   bobberOffset: 0.2
   bobberSpeed: 1.25
   swimmingSpeed: 7
+--- !u!114 &753550746220902194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8170256149282086988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49178ecb324be2041862eaea58373937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reach: 5
 --- !u!1 &8170256149298386695
 GameObject:
   m_ObjectHideFlags: 0

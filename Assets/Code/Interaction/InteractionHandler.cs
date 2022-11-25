@@ -14,7 +14,6 @@ namespace Code.Interaction
 
 		public List<Pickupable> inventory { get; } = new();
 		private bool canInteract = false;
-		private Camera cam; //TODO: remove when survivor has cameraRig.
 		private ControlableEntity controlableEntity;
 		private Transform cachedTransform;
 
@@ -22,30 +21,27 @@ namespace Code.Interaction
 		{
 			cachedTransform = transform;
 			controlableEntity = GetComponent<ControlableEntity>();
-			cam = GetComponentInChildren<Camera>();
 		}
 
-		public void FixedUpdate()
+		private void Update() { InteractionScan(); }
+
+		private void InteractionScan()
 		{
 			canInteract = false;
 
-			Debug.DrawRay(cam.transform.position, cam.transform.forward * reach, Color.cyan);
-
-			Ray ray = new(cam.transform.position, cam.transform.forward); //TODO: replace with cameraRig.Forward
+			Ray ray = new(controlableEntity.cameraRig.followPoint.position, controlableEntity.cameraRig.forward);
 			if (!Physics.Raycast(ray, out RaycastHit hit, reach)) { return; }
+
+			Debug.Log(hit.transform.name);
+
+			IInteractable interactable = hit.transform.GetComponent<IInteractable>();
+			if (interactable == null) { return; }
 
 			canInteract = true;
 
-			if (!Input.GetKey(KeyCode.E)) { return; } //TODO: integrate with InputModules.
+			if (!Input.GetButtonDown(controlableEntity.inputModule.actionButton1)) { return; }
 
-
-			IInteractable interactable = hit.transform.GetComponent<IInteractable>();
-			interactable?.Interact(this);
-		}
-
-		private void OnGUI()
-		{
-			GUI.Label(new Rect(10, 10, 500, 100), "Can interact " + (canInteract ? "yes".Color(Color.green) : "no".Color(Color.red)));
+			interactable.Interact(this);
 		}
 	}
 }
