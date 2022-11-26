@@ -8,19 +8,29 @@ namespace Code
         public Transform cameraFollowPoint { get => _cameraFollowPoint; }
         [SerializeField] float _hoverUnderWater = 1;
         public float hoverUnderWater { get => _hoverUnderWater; }
+        public bool targeted = false;
+        public bool mainTarget = false;
+
         protected override void OnStart()
         {
             base.OnStart();
         }
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
-            SurvivorHandler.Instance.RegisterSurvivor(this);
+            base.OnEnable();
+            FindObjectOfType<SurvivorHandler>()?.RegisterSurvivor(this);
         }
 
-        private void OnDisable()
+        protected override void OnDisable()
         {
-            SurvivorHandler.Instance.DeregisterSurvivor(this);
+            base.OnDisable();
+            FindObjectOfType<SurvivorHandler>()?.DeregisterSurvivor(this);
+        }
+
+        public void SetGrabbedTarget()
+        {
+            Debug.Log("I get grabbed");
         }
 
         protected override void Tick()

@@ -80,6 +80,7 @@ public class InputModule : MonoBehaviour
 
     string FromInputType(InputType type)
     {
+        if (_settings == null) return string.Empty;
         switch(type)
         {
             case InputType.HorizontalMovement: return _settings.horizontalMovement;

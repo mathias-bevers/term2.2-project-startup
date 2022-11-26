@@ -30,5 +30,15 @@ namespace Code
         {
             hasTicked = true;
         }
+
+        protected virtual void OnEnable()
+        {
+
+        }
+
+        protected virtual void OnDisable()
+        {
+
+        }
     }
 }

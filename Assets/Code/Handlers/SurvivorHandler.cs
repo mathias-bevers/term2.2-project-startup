@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SurvivorHandler : InstancedSingleton<SurvivorHandler>
+public class SurvivorHandler : MonoBehaviour
 {
 
     [ReadOnly]
@@ -15,13 +15,13 @@ public class SurvivorHandler : InstancedSingleton<SurvivorHandler>
         if (!registeredSurvivors.Contains(survivor))
         {
             registeredSurvivors.Add(survivor);
-            TargetDisplayHandler.instance.RegisterSurvivor(survivor);
+            FindObjectOfType<TargetDisplayHandler>()?.RegisterSurvivor(survivor);
         }
     }
 
     public void DeregisterSurvivor(Survivor survivor) 
     {
         registeredSurvivors.Remove(survivor);
-        TargetDisplayHandler.instance.DeregisterSurvivor(survivor);
+        FindObjectOfType<TargetDisplayHandler>()?.DeregisterSurvivor(survivor);
     }
 }

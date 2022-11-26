@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TargetDisplayHandler : InstancedSingleton<TargetDisplayHandler>
+public class TargetDisplayHandler : MonoBehaviour
 {
     [SerializeField]
-    Image pointPanel;
+    RectTransform pointPanel;
 
     [SerializeField]
     Transform circleObject;
@@ -28,11 +28,13 @@ public class TargetDisplayHandler : InstancedSingleton<TargetDisplayHandler>
             
             Image img = survivorPoint[s];
             if (img == null) continue;
+            img.color = s.targeted ? s.mainTarget ? Color.blue : Color.red : Color.white;
             Transform t = img.transform;
             t.position = camera.WorldToScreenPoint(s.getPosition);
             float distance = Vector3.Distance(s.getPosition, killer.getPosition);
             t.localScale = Vector3.one * Utils.Map(distance, 0, 20, 2, 0.68f);
-            if (distance > killer.maxDetectionDistance)
+            Vector3 direction = s.getPosition - killer.cameraRig.transform.position;
+            if (distance > killer.maxDetectionDistance || Vector3.Dot(direction, killer.cameraRig.forward) < 0)
             {
                 t.position = new Vector2(100000, 100000);
             }
@@ -42,14 +44,14 @@ public class TargetDisplayHandler : InstancedSingleton<TargetDisplayHandler>
     public void RegisterSurvivor(Survivor survivor)
     {
         if (survivor == null) return;
-        Transform newObject = Instantiate(circleObject, pointPanel.transform);
+        Transform newObject = Instantiate(circleObject, pointPanel);
         Image img = newObject.GetComponent<Image>();
         if (img == null)
         {
             Destroy(newObject.gameObject);
             return;
         }
-        survivorPoint.Add(survivor, img); 
+        survivorPoint.Add(survivor, newObject.GetComponent<Image>()); 
     }
 
     public void DeregisterSurvivor(Survivor survivor)

@@ -42,5 +42,16 @@ namespace Code
             if (_cameraRig == null) return;
             _cameraRig.PassThroughInput(_inputModule.mouseInput, mouseSettings);
         }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+        }
+
     }
 }

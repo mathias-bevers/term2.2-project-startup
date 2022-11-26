@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OverlayCamerasHandler : Singleton<OverlayCamerasHandler>
+public class OverlayCamerasHandler : InstancedSingleton<OverlayCamerasHandler>
 {
     [SerializeField] List<OverlayCameraObject> overlayObjects = new List<OverlayCameraObject>();
 
