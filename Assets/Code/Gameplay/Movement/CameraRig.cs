@@ -5,7 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(CameraRigData))]
 public class CameraRig : MonoBehaviour
 {
-    CameraRigData rigData;
+    CameraRigData _rigData;
+
+    public Camera getCamera => _rigData.camera;
 
 #if UNITY_EDITOR
     [SerializeField] bool drawCollision;
@@ -40,7 +42,7 @@ public class CameraRig : MonoBehaviour
 
     private void Start()
     {
-        rigData= GetComponent<CameraRigData>();
+        _rigData= GetComponent<CameraRigData>();
     }
 
     void Update()
@@ -53,9 +55,9 @@ public class CameraRig : MonoBehaviour
     {
         currentDistance = maxCamDistance;
 
-        rigData.farPoint.localPosition = new Vector3(0, 0, -maxCamDistance);
+        _rigData.farPoint.localPosition = new Vector3(0, 0, -maxCamDistance);
 
-        Vector3 direction = rigData.farPoint.position - transform.position;
+        Vector3 direction = _rigData.farPoint.position - transform.position;
         direction.Normalize();
         Ray ray = new Ray(transform.position, direction);
         RaycastHit hitInfo;
@@ -72,15 +74,15 @@ public class CameraRig : MonoBehaviour
         this.hitPoint = hitPoint;
 #endif
 
-        rigData.cameraHolder.position = hitPoint;
+        _rigData.cameraHolder.position = hitPoint;
         return currentDistance < minDistance;
     }
 
     void HandleCamLayers(bool tooClose = false)
     {
-        if (rigData.camera == null) return;
+        if (_rigData.camera == null) return;
 
-        rigData.camera.cullingMask = tooClose ? renderWhenClose : renderInNormal;
+        _rigData.camera.cullingMask = tooClose ? renderWhenClose : renderInNormal;
     }
 
     void HandleFollow()

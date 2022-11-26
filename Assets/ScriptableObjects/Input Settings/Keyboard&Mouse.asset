@@ -16,7 +16,7 @@ MonoBehaviour:
   _verticalMovement: Vertical
   _horizontalCamera: Mouse X
   _verticalCamera: Mouse Y
-  _jumpInput: 
-  _diveInput: 
-  _actionInput1: 
-  _actionInput2: 
+  _jumpInput: JumpKeyboard
+  _diveInput: DiveKeyboard
+  _actionInput1: Harpoon
+  _actionInput2: HarpoonShoot

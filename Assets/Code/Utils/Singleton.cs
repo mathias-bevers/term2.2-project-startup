@@ -2,50 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Singleton<T> : MonoBehaviour where T : Component
+public abstract class Singleton<T> : InstancedSingleton<T> where T : Component
 {
 
-	#region Fields
+    /// <summary>
+    /// Gets the instance.
+    /// </summary>
+    /// <value>The instance.</value>
+    public static T SafeInstance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<T>();
+                if (instance == null)
+                {
+                    GameObject obj = new GameObject();
+                    obj.name = typeof(T).Name;
+                    instance = obj.AddComponent<T>();
+                }
+            }
+            return instance;
+        }
+    }
 
-	/// <summary>
-	/// The instance.
-	/// </summary>
-	private static T instance;
 
-	#endregion
-
-	#region Properties
-
-	/// <summary>
-	/// Gets the instance.
-	/// </summary>
-	/// <value>The instance.</value>
-	public static T Instance
-	{
-		get
-		{
-			if (instance == null)
-			{
-				instance = FindObjectOfType<T>();
-				if (instance == null)
-				{
-					GameObject obj = new GameObject();
-					obj.name = typeof(T).Name;
-					instance = obj.AddComponent<T>();
-				}
-			}
-			return instance;
-		}
-	}
-
-	#endregion
-
-	#region Methods
-
-	/// <summary>
-	/// Use this for initialization.
-	/// </summary>
-	protected virtual void Awake()
+    /// <summary>
+    /// Use this for initialization.
+    /// </summary>
+    protected override void Awake()
 	{
 		if (instance == null)
 		{
@@ -57,7 +43,4 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
 			Destroy(gameObject);
 		}
 	}
-
-	#endregion
-
 }

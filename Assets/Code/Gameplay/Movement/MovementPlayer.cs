@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Windows;
 
 [RequireComponent(typeof(CharacterController))]
-[RequireComponent(typeof(InputModuleBase))]
+[RequireComponent(typeof(InputModule))]
 [RequireComponent(typeof(CameraMovement))]
 public class MovementPlayer : MonoBehaviour
 {
-    InputModuleBase _inputModule;
+    InputModule _inputModule;
     CharacterController _controller;
     CameraMovement _cameraMovement;
 
@@ -24,7 +25,7 @@ public class MovementPlayer : MonoBehaviour
 
 
     public bool isInWater { get => _isInWater; }
-    public InputModuleBase inputModule { get => _inputModule; }
+    public InputModule inputModule { get => _inputModule; }
     public CharacterController controller { get => _controller; }
     public CameraMovement cameraMovement { get => _cameraMovement; }
 
@@ -45,7 +46,7 @@ public class MovementPlayer : MonoBehaviour
     void Start()
     {
         _controller = GetComponent<CharacterController>();
-        _inputModule = GetComponent<InputModuleBase>();
+        _inputModule = GetComponent<InputModule>();
         _cameraMovement = GetComponent<CameraMovement>();
         if (WaterHandler.Instance == null) return;
         _isInWater = transform.position.y < hoveredWaterDistanceCompensated;
@@ -86,10 +87,10 @@ public class MovementPlayer : MonoBehaviour
         }
 
 
-        canBobber = !Input.GetButton(_inputModule.diveInput);
+        canBobber = !_inputModule.OnButton(InputType.Dive);
 
         if (!canBobber)                                                                                                     SetMovementY(-swimmingSpeed * Time.deltaTime);
-        if (Input.GetButton(_inputModule.jumpInput) && controller.transform.position.y < WaterHandler.Instance.waterLevel)  SetMovementY(swimmingSpeed * Time.deltaTime);
+        if (_inputModule.OnButton(InputType.Jump) && controller.transform.position.y < WaterHandler.Instance.waterLevel)  SetMovementY(swimmingSpeed * Time.deltaTime);
 
         _controller.Move(movementThisFrame);
     }

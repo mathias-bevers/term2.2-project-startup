@@ -11,8 +11,6 @@ public class WaterEffectHandler : MonoBehaviour
     bool inWater = false;
     bool lastInWater = false;
 
-    Camera waterOverlayCamera;
-
     private void Start()
     {
 
@@ -20,7 +18,6 @@ public class WaterEffectHandler : MonoBehaviour
         inWater = cam.transform.position.y < WaterHandler.Instance.transform.position.y;
         lastInWater = !inWater;
 
-        waterOverlayCamera = OverlayCamerasHandler.Instance.GetOverlayCamera("Water Effect");
     }
 
     void Update()
@@ -43,7 +40,5 @@ public class WaterEffectHandler : MonoBehaviour
     void WaterToggleCallback()
     {
         UniversalAdditionalCameraData data = cam.GetUniversalAdditionalCameraData();
-        if (!inWater) data.cameraStack.Add(waterOverlayCamera);
-        else data.cameraStack.Remove(waterOverlayCamera);
     }
 }

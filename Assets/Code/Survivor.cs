@@ -13,6 +13,16 @@ namespace Code
             base.OnStart();
         }
 
+        private void OnEnable()
+        {
+            SurvivorHandler.Instance.RegisterSurvivor(this);
+        }
+
+        private void OnDisable()
+        {
+            SurvivorHandler.Instance.DeregisterSurvivor(this);
+        }
+
         protected override void Tick()
         {
             base.Tick();
