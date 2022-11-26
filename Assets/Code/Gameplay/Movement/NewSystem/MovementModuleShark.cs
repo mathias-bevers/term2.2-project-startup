@@ -50,22 +50,39 @@ public class MovementModuleShark : MovementModuleControlled
     private void Move()
     {
         speed = Mathf.Clamp(speed += (inputDirection.magnitude > 0.1f ? acceleration : -deceleration) * Time.deltaTime, -0.1f, maxSpeed);
-        if (speed < 0) return;
 
-        Quaternion angleQuat = Quaternion.AngleAxis(lastAngle, Vector3.up);
-        Quaternion angleForwardQuat = Quaternion.AngleAxis(lastAngleX, Vector3.right);
+        Vector3 movement;
+        if (speed > 0)
+        {
+            if (_transform.position.y > WaterHandler.Instance.waterLevel - killer.maxUnderwater)
+            {
+                float angle = 0;
+                if (Vector3.Dot(Vector3.up, killer.cameraRig.transform.forward) <= -0.5f)
+                    angle = lastAngleX;
+                _transform.rotation = FromAngles(lastAngle, angle);
+                movement = _transform.forward;
+
+                if (movement.y > 0)
+                    movement.y = 0;
+            }
+            else
+            {
+                _transform.rotation = FromAngles(lastAngle, lastAngleX);
+                movement = _transform.forward;
+            }
+          
+            controller.Move(movement * Time.deltaTime * speed);
+
+        }
+    }
+
+    Quaternion FromAngles(float angleFromUp, float angleFromRight)
+    {
+        Quaternion angleQuat = Quaternion.AngleAxis(angleFromUp, Vector3.up);
+        Quaternion angleForwardQuat = Quaternion.AngleAxis(angleFromRight, Vector3.right);
         Quaternion actualQuat = angleQuat * angleForwardQuat;
         Quaternion quat = Quaternion.RotateTowards(_transform.rotation, actualQuat, maxRotationSpeed * Time.deltaTime);
         quat.eulerAngles = new Vector3(quat.eulerAngles.x, quat.eulerAngles.y, 0);
-        _transform.rotation = quat;
-
-        Vector3 movement = _transform.forward;
-
-        if (_transform.position.y + movement.y > WaterHandler.Instance.waterLevel - killer.maxUnderwater)
-            movement.y = 0;
-
-        //Move(movement, speed);
-
-        controller.Move(movement * Time.deltaTime * speed);
+        return quat;
     }
 }

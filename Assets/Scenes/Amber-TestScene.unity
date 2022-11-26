@@ -463,6 +463,33 @@ PrefabInstance:
       value: Killer Package
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    - target: {fileID: 3844327746683458149, guid: 8d6ddbda09a3fc843aa203b884842c74,
+        type: 3}
+      propertyPath: m_Cameras.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844327746683458149, guid: 8d6ddbda09a3fc843aa203b884842c74,
+        type: 3}
+      propertyPath: m_Cameras.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844327746683458149, guid: 8d6ddbda09a3fc843aa203b884842c74,
+        type: 3}
+      propertyPath: m_RequiresDepthTextureOption
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844327746683458149, guid: 8d6ddbda09a3fc843aa203b884842c74,
+        type: 3}
+      propertyPath: m_RequiresOpaqueTextureOption
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844327746694006575, guid: 8d6ddbda09a3fc843aa203b884842c74,
+        type: 3}
+      propertyPath: _maxUnderwater
+      value: 1.4
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5336629361746737968, guid: 8d6ddbda09a3fc843aa203b884842c74, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8d6ddbda09a3fc843aa203b884842c74, type: 3}
 --- !u!1 &54296565
 GameObject:
