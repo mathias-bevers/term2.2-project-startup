@@ -50,30 +50,29 @@ public class MovementModuleShark : MovementModuleControlled
     private void Move()
     {
         speed = Mathf.Clamp(speed += (inputDirection.magnitude > 0.1f ? acceleration : -deceleration) * Time.deltaTime, -0.1f, maxSpeed);
+        if (speed < 0) return;
 
         Vector3 movement;
-        if (speed > 0)
+        if (_transform.position.y > WaterHandler.Instance.waterLevel - killer.maxUnderwater)
         {
-            if (_transform.position.y > WaterHandler.Instance.waterLevel - killer.maxUnderwater)
-            {
-                float angle = 0;
-                if (Vector3.Dot(Vector3.up, killer.cameraRig.transform.forward) <= -0.5f)
-                    angle = lastAngleX;
-                _transform.rotation = FromAngles(lastAngle, angle);
-                movement = _transform.forward;
+            float angle = 0;
+            if (Vector3.Dot(Vector3.up, killer.cameraRig.transform.forward) <= -0.5f)
+                angle = lastAngleX;
+            _transform.rotation = FromAngles(lastAngle, angle);
+            movement = _transform.forward;
 
-                if (movement.y > 0)
-                    movement.y = 0;
-            }
-            else
-            {
-                _transform.rotation = FromAngles(lastAngle, lastAngleX);
-                movement = _transform.forward;
-            }
-          
-            controller.Move(movement * Time.deltaTime * speed);
-
+            if (movement.y > 0)
+                movement.y = 0;
         }
+        else
+        {
+            _transform.rotation = FromAngles(lastAngle, lastAngleX);
+            movement = _transform.forward;
+        }
+
+        controller.Move(movement * Time.deltaTime * speed);
+
+
     }
 
     Quaternion FromAngles(float angleFromUp, float angleFromRight)

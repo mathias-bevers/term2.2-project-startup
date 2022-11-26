@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.10215251, g: 0.10499711, b: 0.10499329, a: 1}
+  m_IndirectSpecularColor: {r: 0.10215251, g: 0.10499711, b: 0.10499331, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -462,34 +462,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Killer Package
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    - target: {fileID: 3844327746683458149, guid: 8d6ddbda09a3fc843aa203b884842c74,
-        type: 3}
-      propertyPath: m_Cameras.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3844327746683458149, guid: 8d6ddbda09a3fc843aa203b884842c74,
-        type: 3}
-      propertyPath: m_Cameras.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3844327746683458149, guid: 8d6ddbda09a3fc843aa203b884842c74,
-        type: 3}
-      propertyPath: m_RequiresDepthTextureOption
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3844327746683458149, guid: 8d6ddbda09a3fc843aa203b884842c74,
-        type: 3}
-      propertyPath: m_RequiresOpaqueTextureOption
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3844327746694006575, guid: 8d6ddbda09a3fc843aa203b884842c74,
         type: 3}
       propertyPath: _maxUnderwater
-      value: 1.4
+      value: 1.5
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5336629361746737968, guid: 8d6ddbda09a3fc843aa203b884842c74, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d6ddbda09a3fc843aa203b884842c74, type: 3}
 --- !u!1 &54296565
 GameObject:
