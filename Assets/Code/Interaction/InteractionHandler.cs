@@ -1,45 +1,43 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Code.Interaction
 {
-	[RequireComponent(typeof(ControlableEntity))]
-	//Idea: make split up interaction / unclockers. 
-	public class InteractionHandler : MonoBehaviour
-	{
-		[SerializeField] private float reach = 3f;
+    //Idea: make split up interaction / unclockers. 
+    [RequireComponent(typeof(ControlableEntity))]
+    public class InteractionHandler : MonoBehaviour
+    {
+        [SerializeField] private float reach = 3f;
 
-		public bool hasKey => inventory.Any(item => item.GetType() == typeof(Key));
+        public Inventory inventory { get; private set; }
 
-		public List<Pickupable> inventory { get; } = new();
-		private bool canInteract = false;
-		private ControlableEntity controlableEntity;
-		private Transform cachedTransform;
+        private ControlableEntity controlableEntity;
+        private Transform cachedTransform;
 
-		private void Awake()
-		{
-			cachedTransform = transform;
-			controlableEntity = GetComponent<ControlableEntity>();
-		}
+        private void Awake()
+        {
+            cachedTransform = transform;
+            controlableEntity = GetComponent<ControlableEntity>();
 
-		private void Update() { InteractionScan(); }
+            if (controlableEntity.GetType() != typeof(Survivor)) { return; }
 
-		private void InteractionScan()
-		{
-			canInteract = false;
+            inventory = new Inventory();
+        }
 
-			Ray ray = new(controlableEntity.cameraRig.followPoint.position, controlableEntity.cameraRig.forward);
-			if (!Physics.Raycast(ray, out RaycastHit hit, reach)) { return; }
+        private void Update() { InteractionScan(); }
 
-			IInteractable interactable = hit.transform.GetComponent<IInteractable>();
-			if (interactable == null) { return; }
+        private void InteractionScan()
+        {
+            Ray ray = new(controlableEntity.cameraRig.followPoint.position, controlableEntity.cameraRig.forward);
+            Debug.DrawRay(ray.origin, ray.direction * reach);
+            if (!Physics.Raycast(ray, out RaycastHit hit, reach)) { return; }
 
-			canInteract = true;
+            if (!hit.transform.TryGetComponent(out IInteractable interactable)) { return; }
 
-			if (!controlableEntity.inputModule.OnButtonDown(InputType.Dive)) { return; }
+            interactable.OnHover(this);
 
-			interactable.Interact(this);
-		}
-	}
+            if (!controlableEntity.inputModule.OnButtonDown(InputType.ActionButton1)) { return; }
+
+            interactable.Interact(this);
+        }
+    }
 }

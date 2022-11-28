@@ -1,18 +1,26 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Code.Interaction
 {
-	public abstract class Pickupable : MonoBehaviour, IInteractable
-	{
-		public void Interact(InteractionHandler handler)
-		{
-			Pickup(handler);
-		}
+    public abstract class Pickupable : MonoBehaviour, IInteractable
+    {
+        public abstract string name { get; }
+        public GameObject worldPrefab;
 
-		protected virtual void Pickup(InteractionHandler handler)
-		{
-			handler.inventory.Add(this);
-			Destroy(gameObject);
-		}
-	}
+        public void Interact(InteractionHandler handler) { Pickup(handler); }
+
+        public void OnHover(InteractionHandler handler)
+        {
+            Debug.Log($"Hovering {name}");
+            //TODO: implement
+        }
+
+        protected virtual void Awake()
+        {
+            if (worldPrefab == null) { throw new NullReferenceException("worldPrefab variable should be set in the inspector."); }
+        }
+
+        protected virtual void Pickup(InteractionHandler handler) { }
+    }
 }
