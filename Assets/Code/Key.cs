@@ -10,7 +10,7 @@ namespace Code
         {
             if (!handler.inventory.NoDuplicateAdd(this)) { return; }
 
-            Destroy(gameObject);
-        }
+            gameObject.SetActive(false);
+		}
     }
 }

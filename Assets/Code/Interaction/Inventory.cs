@@ -74,29 +74,8 @@ namespace Code.Interaction
 
             if (toDrop == null) { return; }
 
-            Object.Instantiate(toDrop.worldPrefab, dropPoint, Quaternion.identity);
-            Debug.Log("Drop success");
-        }
-
-        public void Update()
-        {
-            string output = inventory.Count == 0 ? "EMPTY" : inventory.Count.ToString();
-            output = inventory.Aggregate(output,
-                (current, pickupable) => current + $"{(pickupable == null ? "null" : $"{pickupable.GetType().Name}")}");
-
-            if (string.IsNullOrEmpty(previousOutput))
-            {
-                previousOutput = output;
-                return;
-            }
-
-            if (output != previousOutput)
-            {
-                Debug.Log('\n'+"CHANGED: " + output + '\n' + previousOutput);
-                Debug.Break();
-            }
-
-            previousOutput = output;
+            toDrop.transform.position = dropPoint;
+            toDrop.gameObject.SetActive(true);
         }
     }
 }
