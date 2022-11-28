@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Code
@@ -19,23 +20,20 @@ namespace Code
         new MovementModuleControlled movementModule { get => (MovementModuleControlled)((MoveableEntity)this).movementModule; set => ((MoveableEntity)this).movementModule = value; }
 
 
+
         protected override void OnStart()
         {
             base.OnStart();
             _inputModule = GetComponent<InputModule>();
             movementModule = GetComponent<MovementModuleControlled>();
             movementModule.inputModule = _inputModule;
-
         }
 
         protected override void Tick()
         {
             base.Tick();
-
-
             HandleCameraMovement();
         }
-
 
         void HandleCameraMovement()
         {
@@ -53,5 +51,9 @@ namespace Code
             base.OnDisable();
         }
 
+        protected override void OnDeath()
+        {
+            base.OnDeath();
+        }
     }
 }

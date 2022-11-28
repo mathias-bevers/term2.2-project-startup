@@ -25,7 +25,7 @@ namespace Code
         public LayerMask collidesWithLayers { get => _collidesWithLayers; set => _collidesWithLayers = value; }
 
         [SerializeField] List<Survivor> targetedSurvivors = new List<Survivor>();
-
+        [SerializeField] float biteOxygenAmount = 30;
 
         protected override void OnStart()
         {
@@ -45,6 +45,8 @@ namespace Code
 
                 if(eatTimer > dinnerTime)
                 {
+                    currentlyTargeted.RegisterSpeedboost(new Speedboost(1.15f, 4f));
+                    currentlyTargeted.getOxygen.RemoveChunk(biteOxygenAmount);
                     currentlyTargeted.SetUngrabbedTarget(this);
                     currentlyTargeted = null;
                     eatTimer = 0;
