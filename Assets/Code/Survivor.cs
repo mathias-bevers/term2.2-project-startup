@@ -3,9 +3,12 @@ using UnityEngine;
 
 namespace Code
 {
+    [RequireComponent(typeof(Oxygen))]
     [RequireComponent(typeof(InteractionHandler))]
 	public class Survivor : ControlableEntity 
 	{
+        Oxygen oxygen;
+        public Oxygen getOxygen { get => oxygen; }
         [SerializeField] Transform _cameraFollowPoint;
         public Transform cameraFollowPoint { get => _cameraFollowPoint; }
         [SerializeField] float _hoverUnderWater = 1;
@@ -25,6 +28,7 @@ namespace Code
 
         protected override void OnStart()
         {
+            oxygen = GetComponent<Oxygen>();
             interaction = GetComponent<InteractionHandler>();
             base.OnStart();
         }
@@ -69,11 +73,12 @@ namespace Code
         protected override void Tick()
         {
             base.Tick();
+        }
 
-            if (eateth)
-            {
-                //cameraRig.LookAt(killer.getController.transform);
-            }
+
+        protected override void OnDeath()
+        {
+            base.OnDeath();
         }
     }
 }

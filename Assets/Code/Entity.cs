@@ -40,5 +40,16 @@ namespace Code
         {
 
         }
+
+
+        public void KillEntity()
+        {
+            OnDeath();
+        }
+
+        protected virtual void OnDeath()
+        {
+
+        }
     }
 }
