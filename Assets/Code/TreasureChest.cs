@@ -12,19 +12,24 @@ namespace Code
 
 		public void Interact(InteractionHandler handler)
 		{
-			if (!handler.hasKey)
-			{
+            if (handler.inventory.HasType<Key>())
+            {
 				Debug.LogWarning($"{handler.gameObject.name} doesn't have a key to open this chest.");
 				return;
-			}
+            }
 
-			++keysUsed;
-			handler.inventory.Remove(handler.inventory.Find(pickupable => pickupable.GetType() == typeof(Key)));
+            ++keysUsed;
+			handler.inventory.Remove<Pickupable>();
 
 			if (keysUsed < keysNeeded) { return; }
 
 			Open();
 		}
+
+        public void OnHover(InteractionHandler handler)
+        {
+            //TODO: implement
+        }
 
 		private void Open() { throw new NotImplementedException(); }
 	}

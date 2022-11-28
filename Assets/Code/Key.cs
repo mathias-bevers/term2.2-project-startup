@@ -1,20 +1,16 @@
-﻿using System.Linq;
+﻿using System;
 using Code.Interaction;
 using UnityEngine;
 
 namespace Code
 {
-	public class Key : Pickupable
-	{
-		protected override void Pickup(InteractionHandler handler)
-		{
-			if (handler.hasKey)
-			{
-				Debug.LogWarning($"{handler.gameObject.name} already has a key in its inventory");
-				return;
-			}
+    public class Key : Pickupable
+    {
+        protected override void Pickup(InteractionHandler handler)
+        {
+            if (!handler.inventory.NoDuplicateAdd(this)) { return; }
 
-			base.Pickup(handler);
+            gameObject.SetActive(false);
 		}
-	}
+    }
 }
