@@ -82,11 +82,11 @@ public class MovementModuleSurvivor : MovementModuleControlled
         if (!isInWater) HandleMovementOutOfWater();
         else HandleMovementInWater();
 
-        canBobber = !Input.GetButton(inputModule.diveInput);
+        canBobber = !inputModule.OnButton(InputType.Dive);
         if (divingFromCamera) { canBobber = false; divingFromCamera = false; }
 
         if (!canBobber) SetMovementY(-swimmingSpeed * Time.deltaTime);
-        if (Input.GetButton(inputModule.jumpInput) && controller.transform.position.y < WaterHandler.Instance.waterLevel) SetMovementY(swimmingSpeed * Time.deltaTime);
+        if (inputModule.OnButton(InputType.Jump) && controller.transform.position.y < hoveredWaterDistance) SetMovementY(swimmingSpeed * Time.deltaTime);
 
 
        // Move(movementThisFrame, movementThisFrame.magnitude);

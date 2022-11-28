@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Code
 {
-	[RequireComponent(typeof(InputModuleBase))]
+	[RequireComponent(typeof(InputModule))]
     [RequireComponent(typeof(MovementModuleControlled))]
 
 	public class ControlableEntity : MoveableEntity
@@ -11,8 +11,8 @@ namespace Code
 
         public CameraRig cameraRig { get => _cameraRig; }
 
-        protected InputModuleBase _inputModule;
-        public InputModuleBase inputModule { get => _inputModule; }
+        protected InputModule _inputModule;
+        public InputModule inputModule { get => _inputModule; }
 
         [SerializeField] MouseSettings mouseSettings;
 
@@ -22,7 +22,7 @@ namespace Code
         protected override void OnStart()
         {
             base.OnStart();
-            _inputModule = GetComponent<InputModuleBase>();
+            _inputModule = GetComponent<InputModule>();
             movementModule = GetComponent<MovementModuleControlled>();
             movementModule.inputModule = _inputModule;
 
@@ -42,5 +42,16 @@ namespace Code
             if (_cameraRig == null) return;
             _cameraRig.PassThroughInput(_inputModule.mouseInput, mouseSettings);
         }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+        }
+
     }
 }

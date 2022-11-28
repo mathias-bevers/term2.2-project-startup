@@ -32,14 +32,12 @@ namespace Code.Interaction
 			Ray ray = new(controlableEntity.cameraRig.followPoint.position, controlableEntity.cameraRig.forward);
 			if (!Physics.Raycast(ray, out RaycastHit hit, reach)) { return; }
 
-			Debug.Log(hit.transform.name);
-
 			IInteractable interactable = hit.transform.GetComponent<IInteractable>();
 			if (interactable == null) { return; }
 
 			canInteract = true;
 
-			if (!Input.GetButtonDown(controlableEntity.inputModule.actionButton1)) { return; }
+			if (!controlableEntity.inputModule.OnButtonDown(InputType.Dive)) { return; }
 
 			interactable.Interact(this);
 		}

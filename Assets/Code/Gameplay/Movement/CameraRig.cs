@@ -5,7 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(CameraRigData))]
 public class CameraRig : MonoBehaviour
 {
-    CameraRigData rigData;
+    CameraRigData _rigData;
+
+    public Camera getCamera => _rigData.camera;
 
 #if UNITY_EDITOR
     [SerializeField] bool drawCollision;
@@ -15,6 +17,8 @@ public class CameraRig : MonoBehaviour
     [Header("Point To Follow")]
     public Transform followPoint;
 
+
+    public float setMaxCamDistance { get => maxCamDistance;  set => maxCamDistance = value; }
     [Header("Camera Settings")]
     [SerializeField] float maxCamDistance = 10;
     [SerializeField] float minDistance = 3;
@@ -25,6 +29,8 @@ public class CameraRig : MonoBehaviour
     [SerializeField] float collisionSize = 1;
     [SerializeField] LayerMask cameraCollidesWith;
     [HideInInspector] public Vector3 forward => transform.forward;
+
+    public LayerMask collidesLayerMask { get => cameraCollidesWith; set => cameraCollidesWith = value; }
 
     float currentDistance = 10;
 
@@ -40,11 +46,11 @@ public class CameraRig : MonoBehaviour
 
     private void Start()
     {
-        rigData= GetComponent<CameraRigData>();
+        _rigData= GetComponent<CameraRigData>();
     }
 
     void Update()
-    {
+    { 
         HandleFollow();
 
         HandleCamLayers(HandleCamDistance());
@@ -53,9 +59,9 @@ public class CameraRig : MonoBehaviour
     {
         currentDistance = maxCamDistance;
 
-        rigData.farPoint.localPosition = new Vector3(0, 0, -maxCamDistance);
+        _rigData.farPoint.localPosition = new Vector3(0, 0, -maxCamDistance);
 
-        Vector3 direction = rigData.farPoint.position - transform.position;
+        Vector3 direction = _rigData.farPoint.position - transform.position;
         direction.Normalize();
         Ray ray = new Ray(transform.position, direction);
         RaycastHit hitInfo;
@@ -72,15 +78,20 @@ public class CameraRig : MonoBehaviour
         this.hitPoint = hitPoint;
 #endif
 
-        rigData.cameraHolder.position = hitPoint;
+        _rigData.cameraHolder.position = hitPoint;
         return currentDistance < minDistance;
     }
 
     void HandleCamLayers(bool tooClose = false)
     {
-        if (rigData.camera == null) return;
+        if (_rigData.camera == null) return;
 
-        rigData.camera.cullingMask = tooClose ? renderWhenClose : renderInNormal;
+        _rigData.camera.cullingMask = tooClose ? renderWhenClose : renderInNormal;
+    }
+
+    public void LookAt(Transform transform)
+    {
+        this.transform.LookAt(transform);
     }
 
     void HandleFollow()

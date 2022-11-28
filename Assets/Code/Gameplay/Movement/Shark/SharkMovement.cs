@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(InputModuleBase))]
+[RequireComponent(typeof(InputModule))]
 [RequireComponent(typeof(CharacterController))]
 public class SharkMovement : MonoBehaviour
 {
-    InputModuleBase inputModule;
+    InputModule inputModule;
     CharacterController characterController;
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        inputModule = GetComponent<InputModuleBase>();
+        inputModule = GetComponent<InputModule>();
     }
     
     void Update()

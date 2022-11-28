@@ -179,6 +179,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8170256149282086978, guid: f471a9dbf54b0004abc54899d58db0a8,
         type: 3}
+      propertyPath: _settings
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170256149282086978, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
       propertyPath: _diveInput
       value: DiveCtrl
       objectReference: {fileID: 0}
@@ -282,7 +287,15 @@ PrefabInstance:
       propertyPath: _cameraRig
       value: 
       objectReference: {fileID: 2008017194973720512}
-    m_RemovedComponents: []
+    - target: {fileID: 8589255872335702750, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
+      propertyPath: _settings
+      value: 
+      objectReference: {fileID: 11400000, guid: a1ae3b972fbdb93409c8052148577c42,
+        type: 2}
+    m_RemovedComponents:
+    - {fileID: 8170256149282086978, guid: f471a9dbf54b0004abc54899d58db0a8, type: 3}
+    - {fileID: 8589255872335702750, guid: f471a9dbf54b0004abc54899d58db0a8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f471a9dbf54b0004abc54899d58db0a8, type: 3}
 --- !u!4 &1295625781650415399 stripped
 Transform:

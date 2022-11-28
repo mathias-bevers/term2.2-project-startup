@@ -14,7 +14,7 @@ public class MovementHarpoon : MonoBehaviour
     [SerializeField] float chargeUpTime = 1.5f;
 
     CameraMovement cam => player.cameraMovement;
-    InputModuleBase input => player.inputModule;
+    InputModule input => player.inputModule;
     public Harpoonable harpoonable { get => _harpoonable; }
 
     float timer = 0;
@@ -52,7 +52,7 @@ public class MovementHarpoon : MonoBehaviour
 
     void ShootHarpoon()
     {
-        if (!Input.GetButtonDown(input.actionButton2)) return;
+        if (!input.OnButtonDown(InputType.ActionButton2)) return;
 
         shot = true;
         timer = 0;
@@ -78,13 +78,13 @@ public class MovementHarpoon : MonoBehaviour
         player.enabled = false;
         player.LookAtProper(info.harpoon.getShootPoint);
 
-        if (Input.GetButtonDown(input.actionButton1))
+        if (input.OnButtonDown(InputType.ActionButton1))
             return BreakHarpoon();
 
         if (Vector3.Distance(info.shooterPos, info.targetPos) < 3)
             return BreakHarpoon();
 
-        if (!Input.GetButton(input.actionButton2))
+        if (!input.OnButton(InputType.ActionButton2))
             return true;
 
         float harpoonStrenth = (info.harpoon.harpoonStrength - info.entityHarpooned.getResistance) * Time.deltaTime;
