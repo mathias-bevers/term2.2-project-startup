@@ -13,7 +13,7 @@ public class MovementModuleShark : MovementModuleControlled
     Vector2 inputDirection = Vector2.zero;
     Killer killer;
 
-    Transform _transform => controller.transform;
+    Transform _transform => getTransform;
 
     float speed = 0;
 
@@ -70,7 +70,7 @@ public class MovementModuleShark : MovementModuleControlled
             movement = _transform.forward;
         }
 
-        controller.Move(movement * Time.deltaTime * speed);
+        Move(movement * Time.deltaTime * speed);
 
 
     }

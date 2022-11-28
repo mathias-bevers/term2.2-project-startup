@@ -66,7 +66,7 @@ namespace Code
             eateth = false;
             cameraRig.setMaxCamDistance = oldCamDistance;
             cameraRig.collidesLayerMask = oldLayerMask;
-            getController.transform.rotation = Quaternion.identity;
+            getTransform.rotation = Quaternion.identity;
             this.killer = null;
         }
 

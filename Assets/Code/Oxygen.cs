@@ -29,7 +29,7 @@ public class Oxygen : MonoBehaviour
 
     private void Update()
     {
-        if (survivor.getController.transform.position.y > WaterHandler.Instance.waterLevel - survivor.hoverUnderWater - 0.5f) return;
+        if (survivor.getTransform.position.y > WaterHandler.Instance.waterLevel - survivor.hoverUnderWater - 0.5f) return;
         currentOxygen -= depleteOxygenPerSecond * Time.deltaTime;
         if (currentOxygen < 0) survivor.KillEntity();
     }

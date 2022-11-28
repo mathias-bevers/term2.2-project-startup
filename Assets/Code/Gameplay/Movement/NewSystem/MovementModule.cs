@@ -5,7 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class MovementModule : MonoBehaviour
 {
-    public CharacterController controller { get; set; }
+    public Transform getTransform { get => controller.transform; }
+    CharacterController controller;
+    public CharacterController setController { set => controller = value; }
 
     internal bool hasController { get; private set; }
 
@@ -35,5 +37,10 @@ public class MovementModule : MonoBehaviour
     internal void Move(Vector3 direction, float speed)
     {
         controller?.Move(direction.normalized * speed * Time.deltaTime);
+    }
+
+    public void Move(Vector3 direction)
+    {
+        controller.Move(direction);
     }
 }

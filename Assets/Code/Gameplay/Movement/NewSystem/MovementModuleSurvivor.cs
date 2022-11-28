@@ -9,7 +9,7 @@ using UnityEngine;
 public class MovementModuleSurvivor : MovementModuleControlled
 {
     Survivor survivor;
-    Transform _transform => controller.transform;
+    Transform _transform => getTransform;
 
     [SerializeField] bool iGetMotionSick = false;
     //[SerializeField] float hoverDistanceUnderWater = 1;
@@ -86,11 +86,12 @@ public class MovementModuleSurvivor : MovementModuleControlled
         if (divingFromCamera) { canBobber = false; divingFromCamera = false; }
 
         if (!canBobber) SetMovementY(-swimmingSpeed * Time.deltaTime);
-        if (inputModule.OnButton(InputType.Jump) && controller.transform.position.y < hoveredWaterDistance) SetMovementY(swimmingSpeed * Time.deltaTime);
+        if (inputModule.OnButton(InputType.Jump) && getTransform.position.y < hoveredWaterDistance) SetMovementY(swimmingSpeed * Time.deltaTime);
 
 
-       // Move(movementThisFrame, movementThisFrame.magnitude);
-        controller.Move(movementThisFrame);
+        // Move(movementThisFrame, movementThisFrame.magnitude);
+        Move(movementThisFrame);
+        //controller.Move(movementThisFrame);
     }
     void HandleMovementOutOfWater()
     {
@@ -157,7 +158,7 @@ public class MovementModuleSurvivor : MovementModuleControlled
     void AddToMovement(Vector3 direction, float power) => movementThisFrame += direction * power * survivor.movementSpeedPerc;
     void SetMovementY(float y) => movementThisFrame = new Vector3(movementThisFrame.x, y, movementThisFrame.z);
     void SetYAxis(Transform obj, float yAxis) => obj.position = new Vector3(obj.position.x, yAxis, obj.position.z);
-    void SetYAxis(float yAxis) => controller.Move(new Vector3(0, yAxis - controller.transform.position.y, 0));
+    void SetYAxis(float yAxis) => Move(new Vector3(0, yAxis - getTransform.position.y, 0));
     float hoveredWaterDistance => WaterHandler.Instance.waterLevel - survivor.hoverUnderWater;
     float hoveredWaterDistanceCompensated => hoveredWaterDistance - smoothingDistance;
 }
