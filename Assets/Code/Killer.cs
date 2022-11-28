@@ -11,6 +11,13 @@ namespace Code
         [SerializeField] float _maxDetectionDistance = 20;
         public float maxDetectionDistance { get => _maxDetectionDistance; }
 
+        [SerializeField]
+        Transform eatPoint;
+        Survivor currentlyTargeted = null;
+        [SerializeField] float dinnerTime = 4;
+        float eatTimer = 0;
+
+
         [Header("Collision Interaction Interface")]
         [SerializeField] CollisionInteraction _collisionInteraction;
         public CollisionInteraction CollisionInteraction { get => _collisionInteraction; set => _collisionInteraction = value; }
@@ -18,6 +25,7 @@ namespace Code
         public LayerMask collidesWithLayers { get => _collidesWithLayers; set => _collidesWithLayers = value; }
 
         [SerializeField] List<Survivor> targetedSurvivors = new List<Survivor>();
+
 
         protected override void OnStart()
         {
@@ -27,7 +35,26 @@ namespace Code
         protected override void Tick()
         {
             base.Tick();
+            HandleTargeting();
 
+            if(currentlyTargeted != null)
+            {
+                currentlyTargeted.transform.position = eatPoint.transform.position;
+                currentlyTargeted.transform.rotation = eatPoint.transform.rotation;
+                eatTimer += Time.deltaTime;
+
+                if(eatTimer > dinnerTime)
+                {
+                    currentlyTargeted.SetUngrabbedTarget(this);
+                    currentlyTargeted = null;
+                    eatTimer = 0;
+                }
+            }
+        }
+
+        void HandleTargeting()
+        {
+            if (currentlyTargeted != null) return;
             float lastDist = float.MaxValue;
             int last = -1;
 
@@ -43,10 +70,14 @@ namespace Code
             for (int i = 0; i < targetedSurvivors.Count; i++)
             {
                 targetedSurvivors[i].mainTarget = false;
-                if (i == last)
-                {
-                    targetedSurvivors[i].mainTarget = true;
+                if (i != last) continue;
 
+                targetedSurvivors[i].mainTarget = true;
+                if (inputModule.OnButtonDown(InputType.ActionButton2))
+                {
+                    targetedSurvivors[i].SetGrabbedTarget(this);
+                    currentlyTargeted = targetedSurvivors[i];
+                    eatTimer = 0;
                 }
             }
         }

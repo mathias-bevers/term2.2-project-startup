@@ -17,6 +17,8 @@ public class CameraRig : MonoBehaviour
     [Header("Point To Follow")]
     public Transform followPoint;
 
+
+    public float setMaxCamDistance { get => maxCamDistance;  set => maxCamDistance = value; }
     [Header("Camera Settings")]
     [SerializeField] float maxCamDistance = 10;
     [SerializeField] float minDistance = 3;
@@ -27,6 +29,8 @@ public class CameraRig : MonoBehaviour
     [SerializeField] float collisionSize = 1;
     [SerializeField] LayerMask cameraCollidesWith;
     [HideInInspector] public Vector3 forward => transform.forward;
+
+    public LayerMask collidesLayerMask { get => cameraCollidesWith; set => cameraCollidesWith = value; }
 
     float currentDistance = 10;
 
@@ -46,7 +50,7 @@ public class CameraRig : MonoBehaviour
     }
 
     void Update()
-    {
+    { 
         HandleFollow();
 
         HandleCamLayers(HandleCamDistance());
@@ -83,6 +87,11 @@ public class CameraRig : MonoBehaviour
         if (_rigData.camera == null) return;
 
         _rigData.camera.cullingMask = tooClose ? renderWhenClose : renderInNormal;
+    }
+
+    public void LookAt(Transform transform)
+    {
+        this.transform.LookAt(transform);
     }
 
     void HandleFollow()

@@ -25,7 +25,6 @@ public class TargetDisplayHandler : MonoBehaviour
         Camera camera = killer.cameraRig.getCamera;
         foreach(Survivor s in survivorPoint.Keys)
         {
-            
             Image img = survivorPoint[s];
             if (img == null) continue;
             img.color = s.targeted ? s.mainTarget ? Color.blue : Color.red : Color.white;
@@ -34,7 +33,7 @@ public class TargetDisplayHandler : MonoBehaviour
             float distance = Vector3.Distance(s.getPosition, killer.getPosition);
             t.localScale = Vector3.one * Utils.Map(distance, 0, 20, 2, 0.68f);
             Vector3 direction = s.getPosition - killer.cameraRig.transform.position;
-            if (distance > killer.maxDetectionDistance || Vector3.Dot(direction, killer.cameraRig.forward) < 0)
+            if (distance > killer.maxDetectionDistance || Vector3.Dot(direction, killer.cameraRig.forward) < 0 || s.eateth)
             {
                 t.position = new Vector2(100000, 100000);
             }
