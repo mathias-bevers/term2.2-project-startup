@@ -45,6 +45,7 @@ namespace Code
 
                 if(eatTimer > dinnerTime)
                 {
+                    currentlyTargeted.RegisterSpeedboost(new Speedboost(1.15f, 4f));
                     currentlyTargeted.getOxygen.RemoveChunk(biteOxygenAmount);
                     currentlyTargeted.SetUngrabbedTarget(this);
                     currentlyTargeted = null;

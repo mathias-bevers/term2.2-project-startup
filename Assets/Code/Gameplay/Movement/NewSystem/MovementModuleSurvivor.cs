@@ -154,7 +154,7 @@ public class MovementModuleSurvivor : MovementModuleControlled
     }
 
 
-    void AddToMovement(Vector3 direction, float power) => movementThisFrame += direction * power;
+    void AddToMovement(Vector3 direction, float power) => movementThisFrame += direction * power * survivor.movementSpeedPerc;
     void SetMovementY(float y) => movementThisFrame = new Vector3(movementThisFrame.x, y, movementThisFrame.z);
     void SetYAxis(Transform obj, float yAxis) => obj.position = new Vector3(obj.position.x, yAxis, obj.position.z);
     void SetYAxis(float yAxis) => controller.Move(new Vector3(0, yAxis - controller.transform.position.y, 0));
