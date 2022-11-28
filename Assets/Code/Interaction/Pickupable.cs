@@ -5,7 +5,6 @@ namespace Code.Interaction
 {
     public abstract class Pickupable : MonoBehaviour, IInteractable
     {
-        public abstract string name { get; }
         public GameObject worldPrefab;
 
         public void Interact(InteractionHandler handler) { Pickup(handler); }
