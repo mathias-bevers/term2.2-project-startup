@@ -8,7 +8,9 @@ namespace Code
     {
         protected override void Pickup(InteractionHandler handler)
         {
+            if (!handler.inventory.NoDuplicateAdd(this)) { return; }
 
+            Destroy(gameObject);
         }
     }
 }

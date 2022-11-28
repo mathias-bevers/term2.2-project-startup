@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Code.Interaction
 {
     public abstract class Pickupable : MonoBehaviour, IInteractable
     {
+        public GameObject worldPrefab;
+
         public void Interact(InteractionHandler handler) { Pickup(handler); }
 
         public void OnHover(InteractionHandler handler)
@@ -12,10 +15,11 @@ namespace Code.Interaction
             //TODO: implement
         }
 
-        protected virtual void Pickup(InteractionHandler handler)
+        protected virtual void Awake()
         {
-            handler.inventory.Add(this);
-            Destroy(gameObject);
+            if (worldPrefab == null) { throw new NullReferenceException("worldPrefab variable should be set in the inspector."); }
         }
+
+        protected virtual void Pickup(InteractionHandler handler) { }
     }
 }

@@ -23,7 +23,11 @@ namespace Code.Interaction
             inventory = new Inventory();
         }
 
-        private void Update() { InteractionScan(); }
+        private void Update()
+        {
+            InteractionScan();
+            inventory.Update(); //TODO: remove
+        }
 
         private void InteractionScan()
         {

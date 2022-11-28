@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using UnityEngine;
 
 namespace Code.Interaction
 {
     public class Inventory
     {
-        public List<Pickupable> inventory;
+        private List<Pickupable> inventory = new();
+        private string previousOutput = string.Empty;
 
         public void Add(Pickupable item)
         {
@@ -47,20 +49,54 @@ namespace Code.Interaction
         ///     Removes the first <see cref="Pickupable" /> in the inventory collection of type <typeparamref name="T" />
         /// </summary>
         /// <typeparam name="T">Type of <see cref="Pickupable" /> to remove</typeparam>
-        public void Remove<T>() where T : Pickupable
+        public Pickupable Remove<T>() where T : Pickupable
         {
             Pickupable toRemove = inventory.Find(item => item.GetType() == typeof(T));
 
-            if (toRemove == null) { return; }
+            if (toRemove == null) { return null; }
 
             inventory.Remove(toRemove);
+            return toRemove;
         }
 
         public bool HasType<T>() where T : Pickupable { return inventory.Any(pickupable => pickupable.GetType() == typeof(T)); }
 
         public bool HasType<T>(T type) where T : Pickupable
         {
+            if (inventory == null) { Debug.Break(); }
+
             return inventory.Any(pickupable => pickupable.GetType() == type.GetType());
+        }
+
+        public void Drop<T>(Vector3 dropPoint) where T : Pickupable
+        {
+            Pickupable toDrop = Remove<T>();
+
+            if (toDrop == null) { return; }
+
+            Object.Instantiate(toDrop.worldPrefab, dropPoint, Quaternion.identity);
+            Debug.Log("Drop success");
+        }
+
+        public void Update()
+        {
+            string output = inventory.Count == 0 ? "EMPTY" : inventory.Count.ToString();
+            output = inventory.Aggregate(output,
+                (current, pickupable) => current + $"{(pickupable == null ? "null" : $"{pickupable.GetType().Name}")}");
+
+            if (string.IsNullOrEmpty(previousOutput))
+            {
+                previousOutput = output;
+                return;
+            }
+
+            if (output != previousOutput)
+            {
+                Debug.Log('\n'+"CHANGED: " + output + '\n' + previousOutput);
+                Debug.Break();
+            }
+
+            previousOutput = output;
         }
     }
 }
