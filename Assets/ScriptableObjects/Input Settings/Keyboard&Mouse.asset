@@ -20,3 +20,5 @@ MonoBehaviour:
   _diveInput: DiveKeyboard
   _actionInput1: HarpoonKeyboard
   _actionInput2: HarpoonShootKeyboard
+  _axisHorizontal: AxisHorizontalKeyboard
+  _axisVertical: AxisHorizontalKeyboard

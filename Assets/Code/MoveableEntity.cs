@@ -58,6 +58,7 @@ namespace Code
             float highest = 1;
             for (int i = activeSpeedboosts.Count - 1; i >= 0; i--)
             {
+                activeSpeedboosts[i].TickTimer();
                 if (activeSpeedboosts[i].speedPercentage > highest)
                     highest = activeSpeedboosts[i].speedPercentage;
                 if (activeSpeedboosts[i].timer <= 0) activeSpeedboosts.RemoveAt(i);
@@ -78,7 +79,7 @@ namespace Code
             this.timer = time;
         }
 
-        void TickTimer()
+        public void TickTimer()
         {
             timer -= Time.deltaTime;
         }
