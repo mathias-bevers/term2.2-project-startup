@@ -6,7 +6,7 @@ namespace Code
 {
 	public class TreasureChest : MonoBehaviour, IInteractable
 	{
-		[SerializeField] private int keysNeeded = 3;
+		[SerializeField, PlusMinus] private int keysNeeded = 3;
 
 		private int keysUsed = 0;
 
