@@ -7,7 +7,8 @@ namespace Code.Interaction
     [RequireComponent(typeof(ControlableEntity))]
     public class InteractionHandler : MonoBehaviour
     {
-        [SerializeField] InteractableWith interactableWith;
+        public List<string> interactableWith;
+
         [SerializeField] private float reach = 3f;
 
         public Inventory inventory { get; private set; }
@@ -34,6 +35,8 @@ namespace Code.Interaction
             if (!Physics.Raycast(ray, out RaycastHit hit, reach)) { return; }
 
             if (!hit.transform.TryGetComponent(out IInteractable interactable)) { return; }
+
+            if (!interactableWith.Contains(interactable.GetType().Name)) return;
 
             interactable.OnHover(this);
 

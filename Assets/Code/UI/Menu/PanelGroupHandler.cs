@@ -30,6 +30,7 @@ public class PanelGroupHandler : MonoBehaviour
 
     private void Update()
     {
+        UpdateButtonMappings();
         if (Input.GetButtonDown(backButton)) OnBack();
         
     }
@@ -47,6 +48,15 @@ public class PanelGroupHandler : MonoBehaviour
     }
 
 
+    void UpdateButtonMappings()
+    {
+        StandaloneInputModule module = ((StandaloneInputModule)getEventSystem.currentInputModule);
+        InputSettings settings = ControllerHandler.Instance.getActiveSettings;
+        if (settings == null) return;
+        module.horizontalAxis = settings.axisHorizontal;
+        module.verticalAxis = settings.axisVertical;
+    }
+
     public void RegisterFocus()
     {
         if (getEventSystem == null) return;
@@ -54,6 +64,7 @@ public class PanelGroupHandler : MonoBehaviour
         {
             if (currentActive == null) return;
             getEventSystem.SetSelectedGameObject(currentActive.currentActive);
+            
         }
     }
 

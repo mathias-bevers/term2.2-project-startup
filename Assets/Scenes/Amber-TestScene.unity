@@ -4598,5 +4598,20 @@ PrefabInstance:
       propertyPath: depleteOxygenPerSecond
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7704900367712517901, guid: cf0ae3410af1e7e4fa15e6236aaad527,
+        type: 3}
+      propertyPath: interactableWith.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704900367712517901, guid: cf0ae3410af1e7e4fa15e6236aaad527,
+        type: 3}
+      propertyPath: interactableWith.Array.data[0]
+      value: Key
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704900367712517901, guid: cf0ae3410af1e7e4fa15e6236aaad527,
+        type: 3}
+      propertyPath: interactableWith.Array.data[1]
+      value: TreasureChest
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf0ae3410af1e7e4fa15e6236aaad527, type: 3}

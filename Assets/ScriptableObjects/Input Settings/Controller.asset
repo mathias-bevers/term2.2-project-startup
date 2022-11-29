@@ -20,3 +20,5 @@ MonoBehaviour:
   _diveInput: DiveCtrl
   _actionInput1: HarpoonCtrl
   _actionInput2: HarpoonShootCtrl
+  _axisHorizontal: AxisHorizontalJoy
+  _axisVertical: AxisVerticalJoy

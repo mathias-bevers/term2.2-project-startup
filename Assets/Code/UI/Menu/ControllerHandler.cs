@@ -30,6 +30,9 @@ public class ControllerHandler : Singleton<ControllerHandler>
     int lastCount = -1;
     public UnityEventInputType callBackOnInputTypeChange = new UnityEventInputType();
 
+    InputSettings _activeSettings;
+    public InputSettings getActiveSettings { get => _activeSettings; }
+
     [SerializeField] PersonalCursorUI cursor;
 
 
@@ -40,7 +43,10 @@ public class ControllerHandler : Singleton<ControllerHandler>
 
         for(int i = 0; i < inputSettings.Count; i++)
         {
-            if (inputSettings[i].IsActive()) inputMode = typeOfInputs[i];
+            if (inputSettings[i].IsActive()) { 
+                inputMode = typeOfInputs[i];
+                _activeSettings = inputSettings[i];
+            }
         }
 
         if(lastInputType != inputMode || lastCount != eventSystems.Length || _lastMouseVisible != mouseVisible)
