@@ -55,7 +55,6 @@ public class UIFillerBar : MonoBehaviour
         if (displayText == null) return;
         displayText.text = GetDisplayText();
 
-
         if(backgroundBar == null) return;
 
         if (!animated) { backgroundBar.fillAmount = 0; return; }

@@ -20,4 +20,16 @@ public class InputSettings : ScriptableObject
     public string diveInput { get => _diveInput; }
     public string actionInput1 { get => _actionInput1; }
     public string actionInput2 { get => _actionInput2; }
+
+    public bool IsActive()
+    {
+        if (new Vector2(Input.GetAxisRaw(horizontalMovement), Input.GetAxisRaw(verticalMovement)).magnitude > 0.15f)
+            return true;
+        if (new Vector2(Input.GetAxisRaw(horizontalCamera), Input.GetAxisRaw(verticalCamera)).magnitude > 0.15f)
+            return true;
+        if (Input.GetButton(jumpInput) || Input.GetButton(diveInput) || Input.GetButton(actionInput1) || Input.GetButton(actionInput2))
+            return true;
+
+        return false;
+    }
 }

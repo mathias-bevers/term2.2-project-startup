@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/StartupScene.unity
+    guid: cfe2ecc561b507a4c86a2fc1011c7c1d
+  - enabled: 1
     path: Assets/Scenes/Amber-TestScene.unity
     guid: d9174291fbe90ea49af736b3b0a3d7f3
   m_configObjects: {}
