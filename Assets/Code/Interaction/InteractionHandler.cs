@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Code.Interaction
 {
@@ -6,6 +7,7 @@ namespace Code.Interaction
     [RequireComponent(typeof(ControlableEntity))]
     public class InteractionHandler : MonoBehaviour
     {
+        [SerializeField] InteractableWith interactableWith;
         [SerializeField] private float reach = 3f;
 
         public Inventory inventory { get; private set; }
@@ -39,5 +41,30 @@ namespace Code.Interaction
 
             interactable.Interact(this);
         }
+    }
+}
+
+[System.Serializable]
+public class InteractableWith
+{
+    [SerializeReference]
+    public List<string> canInteractWith = new List<string>();
+
+
+    public void AddElement(string element)
+    {
+        if(!Contains(element))
+            canInteractWith.Add(element);
+    }
+
+    public void RemoveElement(string element)
+    {
+        if (Contains(element))
+            canInteractWith.Remove(element);
+    }
+
+    public bool Contains(string element)
+    {
+        return canInteractWith.Contains(element);
     }
 }
