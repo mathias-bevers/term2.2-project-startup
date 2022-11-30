@@ -11,6 +11,8 @@ public class InputSettings : ScriptableObject
     [SerializeField] string _diveInput;
     [SerializeField] string _actionInput1;
     [SerializeField] string _actionInput2;
+    [SerializeField] string _axisHorizontal;
+    [SerializeField] string _axisVertical;
     
     public string horizontalMovement { get => _horizontalMovement; }
     public string verticalMovement { get => _verticalMovement; }
@@ -20,4 +22,20 @@ public class InputSettings : ScriptableObject
     public string diveInput { get => _diveInput; }
     public string actionInput1 { get => _actionInput1; }
     public string actionInput2 { get => _actionInput2; }
+    public string axisHorizontal { get => _axisHorizontal; }
+    public string axisVertical { get => _axisVertical; }
+
+    public bool IsActive()
+    {
+        if (new Vector2(Input.GetAxisRaw(horizontalMovement), Input.GetAxisRaw(verticalMovement)).magnitude > 0.15f)
+            return true;
+        if (new Vector2(Input.GetAxisRaw(horizontalCamera), Input.GetAxisRaw(verticalCamera)).magnitude > 0.15f)
+            return true;
+        if (new Vector2(Input.GetAxisRaw(axisHorizontal), Input.GetAxisRaw(axisVertical)).magnitude > 0.15f)
+            return true;
+        if (Input.GetButton(jumpInput) || Input.GetButton(diveInput) || Input.GetButton(actionInput1) || Input.GetButton(actionInput2))
+            return true;
+
+        return false;
+    }
 }

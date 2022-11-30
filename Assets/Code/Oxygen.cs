@@ -19,7 +19,7 @@ public class Oxygen : MonoBehaviour
 
 
     bool _bigDepletion;
-    public bool bigDepletion { get => _bigDepletion; }
+    public bool bigDepletion { get { bool old =  _bigDepletion; _bigDepletion = false; return old; } }
 
     private void Start()
     {
@@ -38,10 +38,5 @@ public class Oxygen : MonoBehaviour
     {
         currentOxygen -= amount;
         _bigDepletion = true;
-    }
-
-    private void LateUpdate()
-    {
-        _bigDepletion = false;
     }
 }
