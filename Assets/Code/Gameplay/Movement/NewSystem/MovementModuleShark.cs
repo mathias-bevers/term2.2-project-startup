@@ -70,9 +70,7 @@ public class MovementModuleShark : MovementModuleControlled
             movement = _transform.forward;
         }
 
-        Move(movement * Time.deltaTime * speed);
-
-
+        Move(movement * killer.movementSpeedPerc * Time.deltaTime * speed );
     }
 
     Quaternion FromAngles(float angleFromUp, float angleFromRight)

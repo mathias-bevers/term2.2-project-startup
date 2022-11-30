@@ -5,8 +5,10 @@ namespace Code
 {
     [RequireComponent(typeof(Oxygen))]
     [RequireComponent(typeof(InteractionHandler))]
+    [RequireComponent(typeof(BleedHandler))]
 	public class Survivor : ControlableEntity 
 	{
+        BleedHandler bleed;
         Oxygen oxygen;
         public Oxygen getOxygen { get => oxygen; }
         [SerializeField] Transform _cameraFollowPoint;
@@ -28,6 +30,8 @@ namespace Code
 
         protected override void OnStart()
         {
+            bleed = GetComponent<BleedHandler>();
+            bleed.enabled = false;
             oxygen = GetComponent<Oxygen>();
             interaction = GetComponent<InteractionHandler>();
             base.OnStart();
@@ -55,11 +59,13 @@ namespace Code
             oldLayerMask = cameraRig.collidesLayerMask;
             cameraRig.collidesLayerMask &= ~(1 << LayerMask.NameToLayer("Player1"));
             cameraRig.setMaxCamDistance = 10;
+            bleed.enabled = true;
             this.killer = killer;
         }
 
         public void SetUngrabbedTarget(Killer killer)
         {
+            bleed.enabled = false;
             movementModule.enabled = true;
             //inputModule.enabled = true;
             interaction.enabled = true;

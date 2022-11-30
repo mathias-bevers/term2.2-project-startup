@@ -167,6 +167,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1295625781590415837}
     m_Modifications:
+    - target: {fileID: 753550746220902194, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
+      propertyPath: interactableWith.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 753550746220902194, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
+      propertyPath: interactableWith.Array.data[0]
+      value: Key
+      objectReference: {fileID: 0}
+    - target: {fileID: 753550746220902194, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
+      propertyPath: interactableWith.Array.data[1]
+      value: TreasureChest
+      objectReference: {fileID: 0}
+    - target: {fileID: 2961309474781590223, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
+      propertyPath: maxOxygen
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 2961309474781590223, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
+      propertyPath: depleteOxygenPerSecond
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8170256149282086976, guid: f471a9dbf54b0004abc54899d58db0a8,
         type: 3}
       propertyPath: m_SlopeLimit
@@ -221,6 +246,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _movementAxisHorizontal
       value: HorizontalJoy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170256149282086979, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
+      propertyPath: swimmingSpeed
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8170256149282086988, guid: f471a9dbf54b0004abc54899d58db0a8,
         type: 3}
@@ -287,15 +317,26 @@ PrefabInstance:
       propertyPath: _cameraRig
       value: 
       objectReference: {fileID: 2008017194973720512}
+    - target: {fileID: 8170256149282086990, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
+      propertyPath: mouseSettings._sensitivityX
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170256149282086990, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
+      propertyPath: mouseSettings._sensitivityY
+      value: 400
+      objectReference: {fileID: 0}
     - target: {fileID: 8589255872335702750, guid: f471a9dbf54b0004abc54899d58db0a8,
         type: 3}
       propertyPath: _settings
       value: 
-      objectReference: {fileID: 11400000, guid: a1ae3b972fbdb93409c8052148577c42,
+      objectReference: {fileID: 11400000, guid: 7e14c62903c4a0f44a446f8ee940942d,
         type: 2}
     m_RemovedComponents:
     - {fileID: 8170256149282086978, guid: f471a9dbf54b0004abc54899d58db0a8, type: 3}
     - {fileID: 8589255872335702750, guid: f471a9dbf54b0004abc54899d58db0a8, type: 3}
+    - {fileID: 3696636218621904197, guid: f471a9dbf54b0004abc54899d58db0a8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f471a9dbf54b0004abc54899d58db0a8, type: 3}
 --- !u!4 &1295625781650415399 stripped
 Transform:
@@ -309,3 +350,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6960428014148372543}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1295625781666719859 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8170256149282086988, guid: f471a9dbf54b0004abc54899d58db0a8,
+    type: 3}
+  m_PrefabInstance: {fileID: 6960428014148372543}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &753102819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295625781666719859}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59ead5a1ca731074f84d891d10652fdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodPrefab: {fileID: 6027093971113296964, guid: 68bc1eab951e41a4f86d3d8785e9efef,
+    type: 3}
+  bloodDelayTime: 0.3

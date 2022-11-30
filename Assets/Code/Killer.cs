@@ -17,7 +17,6 @@ namespace Code
         [SerializeField] float dinnerTime = 4;
         float eatTimer = 0;
 
-
         [Header("Collision Interaction Interface")]
         [SerializeField] CollisionInteraction _collisionInteraction;
         public CollisionInteraction CollisionInteraction { get => _collisionInteraction; set => _collisionInteraction = value; }
@@ -26,6 +25,10 @@ namespace Code
 
         [SerializeField] List<Survivor> targetedSurvivors = new List<Survivor>();
         [SerializeField] float biteOxygenAmount = 30;
+
+        [SerializeField] float cooldown = 30;
+        float cooldownTimer = 0;
+        public InputSettingsEnum buttonToPress;
 
         protected override void OnStart()
         {
@@ -36,22 +39,31 @@ namespace Code
         {
             base.Tick();
             HandleTargeting();
+            HandleTargeted();
 
-            if(currentlyTargeted != null)
-            {
-                currentlyTargeted.transform.position = eatPoint.transform.position;
-                currentlyTargeted.transform.rotation = eatPoint.transform.rotation;
-                eatTimer += Time.deltaTime;
 
-                if(eatTimer > dinnerTime)
-                {
-                    currentlyTargeted.RegisterSpeedboost(new Speedboost(2f, 4f));
-                    currentlyTargeted.getOxygen.RemoveChunk(biteOxygenAmount);
-                    currentlyTargeted.SetUngrabbedTarget(this);
-                    currentlyTargeted = null;
-                    eatTimer = 0;
-                }
-            }
+            if (cooldownTimer > 0) { cooldownTimer -= Time.deltaTime; return; }
+            if (!inputModule.settings.IsDown(buttonToPress)) return;
+
+            cooldownTimer = cooldown;
+            RegisterSpeedboost(new Speedboost(1.5f, 1.5f));
+        }
+
+        void HandleTargeted()
+        {
+            if (currentlyTargeted == null) return;
+
+            currentlyTargeted.transform.position = eatPoint.transform.position;
+            currentlyTargeted.transform.rotation = eatPoint.transform.rotation;
+            eatTimer += Time.deltaTime;
+
+            if (eatTimer <= dinnerTime) return;
+
+            currentlyTargeted.RegisterSpeedboost(new Speedboost(2f, 4f));
+            currentlyTargeted.getOxygen.RemoveChunk(biteOxygenAmount);
+            currentlyTargeted.SetUngrabbedTarget(this);
+            currentlyTargeted = null;
+            eatTimer = 0;
         }
 
         void HandleTargeting()
