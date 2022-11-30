@@ -32,7 +32,7 @@ public class InputSettings : ScriptableObject
     {
         if (new Vector2(Input.GetAxisRaw(horizontalMovement), Input.GetAxisRaw(verticalMovement)).magnitude > 0.15f)
             return true;
-        if (new Vector2(Input.GetAxisRaw(horizontalCamera), Input.GetAxisRaw(verticalCamera)).magnitude > 0.15f)
+        if (new Vector2(Input.GetAxisRaw(horizontalCamera), Input.GetAxisRaw(verticalCamera)).magnitude > 0.05f)
             return true;
         if (new Vector2(Input.GetAxisRaw(axisHorizontal), Input.GetAxisRaw(axisVertical)).magnitude > 0.15f)
             return true;

@@ -24,6 +24,21 @@ namespace Code.Utils
             return temp.ToArray();
         }
 
+        public static string[] AllScenePaths()
+        {
+            List<string> temp = new List<string>();
+            foreach (EditorBuildSettingsScene S in EditorBuildSettings.scenes)
+            {
+                if (S.enabled)
+                {
+                    string name = S.path;
+                    temp.Add(name);
+                }
+            }
+
+            return temp.ToArray();
+        }
+
         public static string[] GetAllAxes()
         {
             List<string> allAxis = new();

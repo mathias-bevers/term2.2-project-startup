@@ -46,9 +46,7 @@ namespace Code
             if (!inputModule.settings.IsDown(buttonToPress)) return;
 
             cooldownTimer = cooldown;
-            Debug.Log("mathias cringe");
             RegisterSpeedboost(new Speedboost(1.5f, 1.5f));
-            
         }
 
         void HandleTargeted()
