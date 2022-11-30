@@ -1,19 +1,21 @@
+using Code.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Input Settings", menuName= "Input/Input Settings", order = 0)]
 public class InputSettings : ScriptableObject
 {
-    [SerializeField] string _horizontalMovement;
-    [SerializeField] string _verticalMovement;
-    [SerializeField] string _horizontalCamera;
-    [SerializeField] string _verticalCamera;
-    [SerializeField] string _jumpInput;
-    [SerializeField] string _diveInput;
-    [SerializeField] string _actionInput1;
-    [SerializeField] string _actionInput2;
-    [SerializeField] string _axisHorizontal;
-    [SerializeField] string _axisVertical;
+   
+    [SerializeField, StringInList("GetAllAxes")] string _horizontalMovement;
+    [SerializeField, StringInList("GetAllAxes")] string _verticalMovement;
+    [SerializeField, StringInList("GetAllAxes")] string _horizontalCamera;
+    [SerializeField, StringInList("GetAllAxes")] string _verticalCamera;
+    [SerializeField, StringInList("GetAllAxes")] string _jumpInput;
+    [SerializeField, StringInList("GetAllAxes")] string _diveInput;
+    [SerializeField, StringInList("GetAllAxes")] string _actionInput1;
+    [SerializeField, StringInList("GetAllAxes")] string _actionInput2;
+    [SerializeField, StringInList("GetAllAxes")] string _axisHorizontal;
+    [SerializeField, StringInList("GetAllAxes")] string _axisVertical;
     
     public string horizontalMovement { get => _horizontalMovement; }
     public string verticalMovement { get => _verticalMovement; }
