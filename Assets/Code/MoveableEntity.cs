@@ -53,20 +53,26 @@ namespace Code
 
         void HandleSpeedboosts()
         {
+           
             if (activeSpeedboosts.Count == 0) currentPercentage = 1;
 
             float highest = 1;
             for (int i = activeSpeedboosts.Count - 1; i >= 0; i--)
             {
                 activeSpeedboosts[i].TickTimer();
+                if (activeSpeedboosts[i].timer <= 0)
+                {
+                    activeSpeedboosts.RemoveAt(i);
+                    continue;
+                }
                 if (activeSpeedboosts[i].speedPercentage > highest)
                     highest = activeSpeedboosts[i].speedPercentage;
-                if (activeSpeedboosts[i].timer <= 0) activeSpeedboosts.RemoveAt(i);
+                
             }
             currentPercentage = highest;
         }
     }
-    public struct Speedboost
+    public class Speedboost
     {
         public float speedPercentage { get; private set; }
         public float time { get; private set; }

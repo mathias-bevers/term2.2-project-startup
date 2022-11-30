@@ -1,15 +1,27 @@
-﻿using System;
+﻿using Code.Interaction;
+using System;
 using UnityEngine;
 
 namespace Code
 {
+    [RequireComponent(typeof(PerkHandler))]
+    [RequireComponent(typeof(InteractionHandler))]
 	public class Entity : MonoBehaviour
 	{
+
+        InteractionHandler _interactionHandler;
+        PerkHandler _perkHandler;
+
+        public InteractionHandler getInteractionHandler { get => _interactionHandler; }
+        public PerkHandler getPerkHandler { get => _perkHandler; }
+
         private bool hasTicked = false;
         private bool hasStarted = false;
 
         private void Start()
         {
+            _interactionHandler = GetComponent<InteractionHandler>();
+            _perkHandler = GetComponent<PerkHandler>();
             OnStart();
             if(!hasStarted) Debug.LogError("Make sure to call base on OnStart() ");
         }

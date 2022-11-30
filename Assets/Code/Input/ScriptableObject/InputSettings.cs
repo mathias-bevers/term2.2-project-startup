@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Input Settings", menuName= "Input/Input Settings", order = 0)]
@@ -38,4 +39,49 @@ public class InputSettings : ScriptableObject
 
         return false;
     }
+
+    public bool IsDown(InputSettingsEnum setting)
+    {
+        switch (setting)
+        {
+            case InputSettingsEnum.HorizontalMovement:
+                return Input.GetAxisRaw(horizontalMovement) > 0.19f;
+            case InputSettingsEnum.VerticalMovement:
+                return Input.GetAxisRaw(verticalMovement) > 0.19f;
+            case InputSettingsEnum.VerticalCamera:
+                return Input.GetAxisRaw(verticalCamera) > 0.19f;
+            case InputSettingsEnum.HorizontalCamera:
+                return Input.GetAxisRaw(horizontalCamera) > 0.19f;
+            case InputSettingsEnum.AxisHorizontal:
+                return Input.GetAxisRaw(axisHorizontal) > 0.19f;
+            case InputSettingsEnum.AxisVertical:
+                return Input.GetAxisRaw(axisVertical) > 0.19f;
+            case InputSettingsEnum.JumpInput:
+                return Input.GetButton(jumpInput);
+            case InputSettingsEnum.DiveInput:
+                return Input.GetButton(diveInput);
+            case InputSettingsEnum.ActionButton1:
+                return Input.GetButton(actionInput1);
+            case InputSettingsEnum.ActionButton2:
+                return Input.GetButton(actionInput2);
+            case InputSettingsEnum.None:
+            default:
+                return false;
+        }
+    }
+}
+
+public enum InputSettingsEnum
+{
+    None,
+    HorizontalMovement,
+    VerticalMovement,
+    HorizontalCamera,
+    VerticalCamera,
+    JumpInput,
+    DiveInput,
+    ActionButton1,
+    ActionButton2,
+    AxisHorizontal,
+    AxisVertical,
 }

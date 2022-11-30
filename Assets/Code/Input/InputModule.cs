@@ -18,6 +18,7 @@ public enum InputType
 public class InputModule : MonoBehaviour
 {
     [SerializeField] InputSettings _settings;
+    public InputSettings settings { get => _settings; }
 
     protected Vector2 _directionalInput { get; set; }
     public Vector2 directionalInput { get => ClampedDirInput(); }

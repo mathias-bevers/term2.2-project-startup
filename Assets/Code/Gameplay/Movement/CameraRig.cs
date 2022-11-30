@@ -20,6 +20,7 @@ public class CameraRig : MonoBehaviour
 
     public float setMaxCamDistance { get => maxCamDistance;  set => maxCamDistance = value; }
     [Header("Camera Settings")]
+    [SerializeField] float cameraReturnSpeed = 5;
     [SerializeField] float maxCamDistance = 10;
     [SerializeField] float minDistance = 3;
     [SerializeField] LayerMask renderInNormal;
@@ -33,6 +34,8 @@ public class CameraRig : MonoBehaviour
     public LayerMask collidesLayerMask { get => cameraCollidesWith; set => cameraCollidesWith = value; }
 
     float currentDistance = 10;
+    float maxDistance = 10;
+
 
     public void PassThroughInput(Vector2 cameraInput, MouseSettings mouseSettings)
     {
@@ -57,7 +60,8 @@ public class CameraRig : MonoBehaviour
     }
     bool HandleCamDistance()
     {
-        currentDistance = maxCamDistance;
+        currentDistance += cameraReturnSpeed * Time.deltaTime;
+        currentDistance = Mathf.Clamp(currentDistance, 0, maxDistance);
 
         _rigData.farPoint.localPosition = new Vector3(0, 0, -maxCamDistance);
 
