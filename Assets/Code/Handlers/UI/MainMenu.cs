@@ -12,7 +12,8 @@ public class MainMenu : PanelGroupHandler
 
     public void StartGame()
     {
-        //SceneManager.LoadScene("LoadingScene");
+        SceneManager.UnloadSceneAsync("MainMenu");
+        SceneManager.LoadScene("Map_1", LoadSceneMode.Additive);
         //StartCoroutine(StartupGame());
 
 

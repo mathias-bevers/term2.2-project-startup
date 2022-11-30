@@ -44,7 +44,6 @@ public class ControllerHandler : Singleton<ControllerHandler>
         for(int i = 0; i < inputSettings.Count; i++)
         {
             bool isActive = inputSettings[i].IsActive();
-            Debug.Log(inputSettings[i].name + ": " + isActive);
             if (isActive) { 
                 inputMode = typeOfInputs[i];
                 _activeSettings = inputSettings[i];
