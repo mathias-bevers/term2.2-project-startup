@@ -68,8 +68,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: a528ba4c6be92064e80b23d795ef0352, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -97,7 +97,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.6901961, g: 0.6901961, b: 0.6901961, a: 1}
@@ -107,9 +107,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: a528ba4c6be92064e80b23d795ef0352,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 2a61a32287469864a8b090f0d1463d99, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: 2a61a32287469864a8b090f0d1463d99, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -121,7 +122,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4080462382235537207}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PanelGroupHandler, Assembly-CSharp
+        m_MethodName: SetActive
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: PanelGroup, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &4062003608685928836
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -238,6 +251,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 71939019143796857, guid: 90cb6d77f939f894ab72949dcf0e241d,
+        type: 3}
+      propertyPath: m_Text
+      value: Settings
+      objectReference: {fileID: 0}
+    - target: {fileID: 71939019143796857, guid: 90cb6d77f939f894ab72949dcf0e241d,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 71939019143796857, guid: 90cb6d77f939f894ab72949dcf0e241d,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8346867
+      objectReference: {fileID: 0}
+    - target: {fileID: 71939019143796857, guid: 90cb6d77f939f894ab72949dcf0e241d,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.75157225
+      objectReference: {fileID: 0}
+    - target: {fileID: 71939019143796857, guid: 90cb6d77f939f894ab72949dcf0e241d,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90cb6d77f939f894ab72949dcf0e241d, type: 3}
