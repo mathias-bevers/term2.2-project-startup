@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartupHandler : Singleton<StartupHandler>
+public class StartupHandler : MonoBehaviour
 {
-    [SerializeField] string firstActiveScene = "Amber-TestScene";
+    [SerializeField] string firstActiveScene = "MainMenu";
     [SerializeField] List<string> redirectIfThisScene = new List<string>();
-    public static string activeScene = "Amber-TestScene";
+    public static string activeScene = "MainMenu";
 
     [RuntimeInitializeOnLoadMethod]
     static void RunTimeMethod()
     {
-        
+      
         activeScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene("StartupScene", LoadSceneMode.Single);
+    }
+
+    private void Start()
+    {
+
     }
 
     private void OnEnable()

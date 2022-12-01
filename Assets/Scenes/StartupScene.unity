@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3746f31344eb08a458d337c62de94ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstActiveScene: Amber-TestScene
+  firstActiveScene: MainMenu
   redirectIfThisScene:
   - StartupScene
 --- !u!1 &1127111897

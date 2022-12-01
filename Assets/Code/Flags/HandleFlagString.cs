@@ -6,7 +6,7 @@ public class HandleFlagString : HandleFlagBase
     [SerializeField] UnityEvent<string> stringEvent;
 
     string oldValue = "";
-
+    
     void Update()
     {
         string newValue = FlagHandler.Instance.GetFlagString(flagName);

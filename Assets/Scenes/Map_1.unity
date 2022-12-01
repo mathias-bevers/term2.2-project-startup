@@ -2616,6 +2616,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: SurvivorPacket
       objectReference: {fileID: 0}
+    - target: {fileID: 2008017194147591042, guid: cf0ae3410af1e7e4fa15e6236aaad527,
+        type: 3}
+      propertyPath: m_TargetDisplay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2008017194147591042, guid: cf0ae3410af1e7e4fa15e6236aaad527,
+        type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf0ae3410af1e7e4fa15e6236aaad527, type: 3}
 --- !u!114 &769193350 stripped

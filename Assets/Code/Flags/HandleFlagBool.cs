@@ -3,13 +3,14 @@ using UnityEngine.Events;
 
 public class HandleFlagBool : HandleFlagBase
 {
+    [SerializeField] bool defaultValue;
     [SerializeField] UnityEvent<bool> boolEvent;
 
     bool oldValue = false;
 
     void Update()
     {
-        bool newValue = FlagHandler.Instance.GetFlagBool(flagName);
+        bool newValue = FlagHandler.Instance.GetFlagBool(flagName) ?? defaultValue;
         if (newValue != oldValue)
         {
             oldValue = newValue;

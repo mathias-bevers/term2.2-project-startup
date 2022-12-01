@@ -122,15 +122,15 @@ public class FlagHandler : Singleton<FlagHandler>
         return ((StringFlag)flagBase).value;
     }
 
-    public bool GetFlagBool(string flag)
+    public bool? GetFlagBool(string flag)
     {
         flag = SanitzeFlag(flag);
-        if (!flags.ContainsKey(flag)) return false;
+        if (!flags.ContainsKey(flag)) return null;
         FlagBase flagBase = flags[flag];
-        if (flagBase.GetType() != typeof(BoolFlag)) return false;
+        if (flagBase.GetType() != typeof(BoolFlag)) return null;
         return ((BoolFlag)flagBase).value;
     }
-
+    
     public void SetFlag(string flag, float value)
     {
         flag = SanitzeFlag(flag);

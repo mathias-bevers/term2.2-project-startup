@@ -27,7 +27,7 @@ public class MainMenu : PanelGroupHandler
             //if (currentActive.backwardsPanel == null)
                 //if (SceneManager.GetActiveScene().name == "GameplayScene") FindObjectOfType<PauseMenu>().TogglePause();
         base.OnBack();
-        //FlagHandler.Instance.WriteFile();
+        FlagHandler.Instance.WriteFile();
 
 
     }
