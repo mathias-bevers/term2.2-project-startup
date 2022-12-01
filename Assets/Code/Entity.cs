@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Code
 {
-    [RequireComponent(typeof(PerkHandler))]
     [RequireComponent(typeof(InteractionHandler))]
 	public class Entity : MonoBehaviour
 	{

@@ -15,6 +15,7 @@ namespace Code
         public Transform cameraFollowPoint { get => _cameraFollowPoint; }
         [SerializeField] float _hoverUnderWater = 1;
         public float hoverUnderWater { get => _hoverUnderWater; }
+        [SerializeField] float timeForBleed = 8;
 
 
         public bool targeted = false;
@@ -60,12 +61,14 @@ namespace Code
             cameraRig.collidesLayerMask &= ~(1 << LayerMask.NameToLayer("Player1"));
             cameraRig.setMaxCamDistance = 10;
             bleed.enabled = true;
+            getController.enabled = false;
             this.killer = killer;
         }
 
         public void SetUngrabbedTarget(Killer killer)
         {
-            bleed.enabled = false;
+            bloodTimer = timeForBleed;
+           // bleed.enabled = false;
             movementModule.enabled = true;
             //inputModule.enabled = true;
             interaction.enabled = true;
@@ -73,12 +76,24 @@ namespace Code
             cameraRig.setMaxCamDistance = oldCamDistance;
             cameraRig.collidesLayerMask = oldLayerMask;
             getTransform.rotation = Quaternion.identity;
+            getController.enabled = true;
             this.killer = null;
         }
+
+        float bloodTimer = 0;
 
         protected override void Tick()
         {
             base.Tick();
+            if(bloodTimer >= 0)
+            {
+                bloodTimer -= Time.deltaTime;
+                if(bloodTimer <= 0)
+                {
+                    bleed.enabled = false;
+                }
+            }
+            
         }
 
 

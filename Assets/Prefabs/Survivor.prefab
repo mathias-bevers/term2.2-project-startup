@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 8170256149282086989}
   - component: {fileID: 8170256149282086976}
   - component: {fileID: 8170256149282086990}
-  - component: {fileID: 8170256149282086978}
   - component: {fileID: 8170256149282086979}
   - component: {fileID: 753550746220902194}
+  - component: {fileID: 2961309474781590223}
+  - component: {fileID: 3696636218621904197}
+  - component: {fileID: 8589255872335702750}
   m_Layer: 7
   m_Name: Survivor
   m_TagString: Untagged
@@ -76,26 +78,9 @@ MonoBehaviour:
     _invertY: 0
   _cameraFollowPoint: {fileID: 8170256149298386712}
   _hoverUnderWater: 0
---- !u!114 &8170256149282086978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8170256149282086988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b831e8eccfa518142af1deb63bfdca61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _movementAxisHorizontal: Horizontal
-  _movementAxisVertical: Vertical
-  _cameraAxisHorizontal: Mouse X
-  _cameraAxisVertical: Mouse Y
-  _jumpInput: JumpKeyboard
-  _diveInput: DiveKeyboard
-  _actionButton1: Harpoon
-  _actionButton2: HarpoonShoot
+  targeted: 0
+  mainTarget: 0
+  eateth: 0
 --- !u!114 &8170256149282086979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,7 +111,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49178ecb324be2041862eaea58373937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableWith: []
   reach: 5
+--- !u!114 &2961309474781590223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8170256149282086988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb8d4507089b2ab40b556a241a439835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxOxygen: 0
+  currentOxygen: 0
+  depleteOxygenPerSecond: 0
+--- !u!114 &3696636218621904197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8170256149282086988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59ead5a1ca731074f84d891d10652fdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodPrefab: {fileID: 0}
+  bloodDelayTime: 1
+--- !u!114 &8589255872335702750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8170256149282086988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68225ab51437c764c99d9dbdab3b8a6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settings: {fileID: 0}
 --- !u!1 &8170256149298386695
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,7 +197,6 @@ GameObject:
   - component: {fileID: 8170256149359066319}
   - component: {fileID: 8170256149359066306}
   - component: {fileID: 8170256149359066305}
-  - component: {fileID: 8170256149359066304}
   m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
@@ -242,19 +269,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8170256149359066304
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8170256149359066318}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8170256149724194849
 GameObject:
   m_ObjectHideFlags: 0

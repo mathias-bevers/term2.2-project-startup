@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 1809461108328966087}
   - component: {fileID: 1809461108328966072}
   - component: {fileID: 1809461108328966073}
-  - component: {fileID: 1809461108328966074}
   - component: {fileID: 1809461108328966075}
+  - component: {fileID: 8499438206552270985}
+  - component: {fileID: 5711375232445778226}
   m_Layer: 6
   m_Name: Killer
   m_TagString: Untagged
@@ -56,6 +57,17 @@ MonoBehaviour:
     _invertX: 0
     _invertY: 0
   _maxUnderwater: 2
+  _maxDetectionDistance: 20
+  eatPoint: {fileID: 0}
+  dinnerTime: 4
+  _collisionInteraction: {fileID: 0}
+  _collidesWithLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  targetedSurvivors: []
+  biteOxygenAmount: 30
+  cooldown: 30
+  buttonToPress: 0
 --- !u!143 &1809461108328966073
 CharacterController:
   m_ObjectHideFlags: 0
@@ -74,26 +86,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &1809461108328966074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1809461108328966086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b831e8eccfa518142af1deb63bfdca61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _movementAxisHorizontal: Horizontal
-  _movementAxisVertical: Vertical
-  _cameraAxisHorizontal: Mouse X
-  _cameraAxisVertical: Mouse Y
-  _jumpInput: Jump
-  _diveInput: Dive
-  _actionButton1: Harpoon
-  _actionButton2: HarpoonShoot
 --- !u!114 &1809461108328966075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +102,33 @@ MonoBehaviour:
   acceleration: 19
   deceleration: 30
   maxRotationSpeed: 140
+--- !u!114 &8499438206552270985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809461108328966086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68225ab51437c764c99d9dbdab3b8a6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settings: {fileID: 0}
+--- !u!114 &5711375232445778226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809461108328966086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49178ecb324be2041862eaea58373937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableWith: []
+  reach: 3
 --- !u!1 &1809461108805156435
 GameObject:
   m_ObjectHideFlags: 0
