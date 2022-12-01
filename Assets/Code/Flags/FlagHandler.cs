@@ -8,11 +8,12 @@ public class FlagHandler : Singleton<FlagHandler>
 {
     Dictionary<string, FlagBase> flags = new Dictionary<string, FlagBase>();
 
-    string fileName = "Immemor.txt";
-    string path = string.Empty;
+    private const string FILE_NAME = @"wo'ah.txt";
+    private string path = string.Empty;
+    
     void Start()
     {
-        path = Application.persistentDataPath + "/" + fileName;
+        path = Application.persistentDataPath + "/" + FILE_NAME;
         CreateFile();
         ReadFile();
     }
@@ -94,21 +95,21 @@ public class FlagHandler : Singleton<FlagHandler>
 
   
 
-    public float GetFlagFloat(string flag)
+    public float? GetFlagFloat(string flag)
     {
         flag = SanitzeFlag(flag);
-        if (!flags.ContainsKey(flag)) return 0;
+        if (!flags.ContainsKey(flag)) return null;
         FlagBase flagBase = flags[flag];
-        if (flagBase.GetType() != typeof(FloatFlag)) return 0;
+        if (flagBase.GetType() != typeof(FloatFlag)) return null;
         return ((FloatFlag)flagBase).value;
     }
 
-    public int GetFlagInt(string flag)
+    public int? GetFlagInt(string flag)
     {
         flag = SanitzeFlag(flag);
-        if (!flags.ContainsKey(flag)) return 0;
+        if (!flags.ContainsKey(flag)) return null;
         FlagBase flagBase = flags[flag];
-        if (flagBase.GetType() != typeof(IntFlag)) return 0;
+        if (flagBase.GetType() != typeof(IntFlag)) return null;
         return ((IntFlag)flagBase).value;
     }
 

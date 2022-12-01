@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using Code.Interaction;
 using UnityEngine;
+using UnityEditor;
 
 namespace Code.Editor
 {
@@ -34,4 +36,21 @@ namespace Code.Editor
             }
         }
     }
+
+#if UNITY_EDITOR
+    [CustomEditor(typeof(DeveloperShortcuts))]
+    public class DeveloperEditor : UnityEditor.Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+
+            if (GUILayout.Button("Open persistent data path"))
+            {
+				string path = Application.persistentDataPath.Replace(@"/", @"\");
+                Process.Start("explorer.exe", "/select," + path);
+			}
+        }
+    }
+#endif
 }
