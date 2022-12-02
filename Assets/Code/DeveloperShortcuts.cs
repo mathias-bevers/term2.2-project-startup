@@ -1,17 +1,16 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Code.Interaction;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 namespace Code.Editor
 {
     public class DeveloperShortcuts : MonoBehaviour
     {
         [SerializeField] private GameObject endingPanel;
+        private InteractionHandler interactionHandler;
 
         private Survivor survivor;
-        private InteractionHandler interactionHandler;
 
         private void Awake()
         {
@@ -21,10 +20,7 @@ namespace Code.Editor
 
         private void Update()
         {
-            if (Input.GetKeyUp(KeyCode.F1))
-            {
-                interactionHandler.inventory.Drop<Key>(survivor.transform.position);
-            }
+            if (Input.GetKeyUp(KeyCode.F1)) { interactionHandler.inventory.Drop<Key>(survivor.transform.position); }
 
             if (Input.GetKeyUp(KeyCode.F2))
             {
@@ -35,6 +31,16 @@ namespace Code.Editor
                 animation.Play();
             }
         }
+
+#if UNITY_EDITOR
+        [MenuItem("Wo'ah/Open persistence data path")]
+        public static void OpenPersistenceDataPath()
+        {
+            string path = Application.persistentDataPath;
+            path = path.Replace(@"/", @"\");
+            Process.Start("explorer.exe", "/select," + path);
+        }
+#endif
     }
 
 #if UNITY_EDITOR
@@ -47,9 +53,8 @@ namespace Code.Editor
 
             if (GUILayout.Button("Open persistent data path"))
             {
-				string path = Application.persistentDataPath.Replace(@"/", @"\");
-                Process.Start("explorer.exe", "/select," + path);
-			}
+                DeveloperShortcuts.OpenPersistenceDataPath();
+            }
         }
     }
 #endif
