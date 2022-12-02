@@ -12,8 +12,8 @@ public class MainMenu : PanelGroupHandler
 
     public void StartGame()
     {
-        SceneManager.UnloadSceneAsync("MainMenu");
-        SceneManager.LoadScene("Map_1", LoadSceneMode.Additive);
+        //SceneManager.UnloadSceneAsync("MainMenu");
+        SceneManager.LoadScene("Map_1", LoadSceneMode.Single);
         //StartCoroutine(StartupGame());
 
 
@@ -27,7 +27,7 @@ public class MainMenu : PanelGroupHandler
             //if (currentActive.backwardsPanel == null)
                 //if (SceneManager.GetActiveScene().name == "GameplayScene") FindObjectOfType<PauseMenu>().TogglePause();
         base.OnBack();
-        //FlagHandler.Instance.WriteFile();
+        FlagHandler.Instance.WriteFile();
 
 
     }

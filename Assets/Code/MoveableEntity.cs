@@ -8,7 +8,7 @@ namespace Code
     public class MoveableEntity : Entity
 	{
         CharacterController controller;
-        //public CharacterController getController { get => controller; }
+        public CharacterController getController { get => controller; set => controller = value; }
         public Transform getTransform { get => controller.transform; }
         internal MovementModule movementModule;
         public Vector3 getPosition { get => controller.transform.position; }

@@ -153,8 +153,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1127111901}
-  m_Father: {fileID: 894930789}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &127554569
 MonoBehaviour:
@@ -204,8 +204,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 127554568}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -221,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3746f31344eb08a458d337c62de94ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstActiveScene: Amber-TestScene
+  firstActiveScene: MainMenu
   redirectIfThisScene:
   - StartupScene
 --- !u!1 &1127111897
