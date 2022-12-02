@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e713116353344ff428f93df46ca7ab8b, type: 3}
+  m_Name: ControllerXbox
+  m_EditorClassIdentifier: 
+  _horizontalMovement: HorizontalJoyXbox
+  _verticalMovement: VerticalJoyXbox
+  _horizontalCamera: CameraXbox
+  _verticalCamera: CameraYXbox
+  _jumpInput: JumpXbox
+  _diveInput: DiveXbox
+  _actionInput1: HarpoonXbox
+  _actionInput2: HarpoonShootXbox
+  _axisHorizontal: AxisHorizontalJoyXbox
+  _axisVertical: AxisVerticalJoyXbox

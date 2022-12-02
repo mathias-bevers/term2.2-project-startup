@@ -2641,6 +2641,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: SurvivorPacket
       objectReference: {fileID: 0}
+    - target: {fileID: 1705530361661629153, guid: cf0ae3410af1e7e4fa15e6236aaad527,
+        type: 3}
+      propertyPath: _settings
+      value: 
+      objectReference: {fileID: 11400000, guid: d95f5d609ceaa5c4bb80de597556a97b,
+        type: 2}
     - target: {fileID: 2008017194147591042, guid: cf0ae3410af1e7e4fa15e6236aaad527,
         type: 3}
       propertyPath: m_TargetDisplay
