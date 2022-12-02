@@ -2450,6 +2450,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Killer Package
       objectReference: {fileID: 0}
+    - target: {fileID: 3844327746402324001, guid: 8d6ddbda09a3fc843aa203b884842c74,
+        type: 3}
+      propertyPath: cameraCollidesWith.m_Bits
+      value: 257
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844327746683458147, guid: 8d6ddbda09a3fc843aa203b884842c74,
+        type: 3}
+      propertyPath: m_NormalizedViewPortRect.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844327746683458147, guid: 8d6ddbda09a3fc843aa203b884842c74,
+        type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844327746694006575, guid: 8d6ddbda09a3fc843aa203b884842c74,
+        type: 3}
+      propertyPath: mouseSettings._sensitivityX
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844327746694006575, guid: 8d6ddbda09a3fc843aa203b884842c74,
+        type: 3}
+      propertyPath: mouseSettings._sensitivityY
+      value: 80
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d6ddbda09a3fc843aa203b884842c74, type: 3}
 --- !u!1 &686280796
