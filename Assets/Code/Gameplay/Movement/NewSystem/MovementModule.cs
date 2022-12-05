@@ -14,6 +14,8 @@ public class MovementModule : MonoBehaviour
     float _speed;
     public float getSpeed { get => _speed; }
 
+    List<float> speedsGotten = new List<float>();
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -39,13 +41,25 @@ public class MovementModule : MonoBehaviour
 
     internal void Move(Vector3 direction, float speed)
     {
-        _speed = speed;
+        speedsGotten.Add(speed);
         controller?.Move(direction.normalized * speed * Time.deltaTime);
     }
 
     public void Move(Vector3 direction)
     {
-        _speed = direction.magnitude;
+        speedsGotten.Add(direction.magnitude);
         controller.Move(direction);
+    }
+
+    private void FixedUpdate()
+    {
+        if (speedsGotten.Count == 0) return;
+        float internalSpeed = 0;
+        for(int i = 0; i < speedsGotten.Count; i++)
+        {
+            internalSpeed += speedsGotten[i];
+        }   
+        _speed = internalSpeed;
+        speedsGotten.Clear();
     }
 }
