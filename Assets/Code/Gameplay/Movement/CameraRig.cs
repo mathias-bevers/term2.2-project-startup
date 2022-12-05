@@ -34,7 +34,7 @@ public class CameraRig : MonoBehaviour
     public LayerMask collidesLayerMask { get => cameraCollidesWith; set => cameraCollidesWith = value; }
 
     float currentDistance = 10;
-    float maxDistance = 10;
+    //float maxDistance = 10;
 
 
     public void PassThroughInput(Vector2 cameraInput, MouseSettings mouseSettings)
@@ -61,7 +61,7 @@ public class CameraRig : MonoBehaviour
     bool HandleCamDistance()
     {
         currentDistance += cameraReturnSpeed * Time.deltaTime;
-        currentDistance = Mathf.Clamp(currentDistance, 0, maxDistance);
+        currentDistance = Mathf.Clamp(currentDistance, 0, maxCamDistance);
 
         _rigData.farPoint.localPosition = new Vector3(0, 0, -maxCamDistance);
 
@@ -100,8 +100,9 @@ public class CameraRig : MonoBehaviour
 
     void HandleFollow()
     {
-        if (followPoint == null) return; 
-        transform.position = followPoint.position;
+        if (followPoint == null) return;
+        transform.position = Vector3.Slerp(transform.position, followPoint.position, 50 * Time.deltaTime);
+        //transform.position = followPoint.position;
     }
 #if UNITY_EDITOR
     private void OnDrawGizmos()

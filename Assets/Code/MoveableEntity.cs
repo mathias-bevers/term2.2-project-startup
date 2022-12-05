@@ -13,6 +13,8 @@ namespace Code
         internal MovementModule movementModule;
         public Vector3 getPosition { get => controller.transform.position; }
 
+
+
         protected override void OnStart()
         {
             controller = GetComponent<CharacterController>();

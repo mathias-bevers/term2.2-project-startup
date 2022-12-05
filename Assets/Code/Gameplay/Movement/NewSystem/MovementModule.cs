@@ -11,6 +11,9 @@ public class MovementModule : MonoBehaviour
 
     internal bool hasController { get; private set; }
 
+    float _speed;
+    public float getSpeed { get => _speed; }
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -36,11 +39,13 @@ public class MovementModule : MonoBehaviour
 
     internal void Move(Vector3 direction, float speed)
     {
+        _speed = speed;
         controller?.Move(direction.normalized * speed * Time.deltaTime);
     }
 
     public void Move(Vector3 direction)
     {
+        _speed = direction.magnitude;
         controller.Move(direction);
     }
 }

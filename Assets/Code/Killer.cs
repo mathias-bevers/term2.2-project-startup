@@ -30,6 +30,11 @@ namespace Code
         float cooldownTimer = 0;
         public InputSettingsEnum buttonToPress;
 
+        [SerializeField] Animator sharkAnimation;
+
+        [SerializeField] float biteCooldown = 3;
+        float biteTimer = 0;
+
         protected override void OnStart()
         {
             base.OnStart();
@@ -40,8 +45,12 @@ namespace Code
             base.Tick();
             HandleTargeting();
             HandleTargeted();
+            HandleSpeedboosts();
+            sharkAnimation.SetFloat("SpeedSwimming", movementModule.getSpeed);
+        }
 
-
+        void HandleSpeedboosts()
+        {
             if (cooldownTimer > 0) { cooldownTimer -= Time.deltaTime; return; }
             if (!inputModule.settings.IsDown(buttonToPress)) return;
 
@@ -52,6 +61,8 @@ namespace Code
         void HandleTargeted()
         {
             if (currentlyTargeted == null) return;
+
+            biteTimer = biteCooldown;
 
             currentlyTargeted.transform.position = eatPoint.transform.position;
             currentlyTargeted.transform.rotation = eatPoint.transform.rotation;
@@ -68,7 +79,17 @@ namespace Code
 
         void HandleTargeting()
         {
-            if (currentlyTargeted != null) return;
+            sharkAnimation.ResetTrigger("Bite");
+            bool hasBitten = false;
+            biteTimer -= Time.deltaTime;
+            if (inputModule.OnButtonDown(InputType.ActionButton2) && biteTimer <= 0)
+            {
+                hasBitten = true;
+                sharkAnimation.SetTrigger("Bite");
+                biteTimer = biteCooldown;
+            }
+
+                if (currentlyTargeted != null) return;
             float lastDist = float.MaxValue;
             int last = -1;
 
@@ -87,7 +108,7 @@ namespace Code
                 if (i != last) continue;
 
                 targetedSurvivors[i].mainTarget = true;
-                if (inputModule.OnButtonDown(InputType.ActionButton2))
+                if (hasBitten)
                 {
                     targetedSurvivors[i].SetGrabbedTarget(this);
                     currentlyTargeted = targetedSurvivors[i];
