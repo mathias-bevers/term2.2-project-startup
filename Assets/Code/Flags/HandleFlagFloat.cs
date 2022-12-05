@@ -28,6 +28,6 @@ public class HandleFlagFloat : HandleFlagBase
 //because unity cannot track it otherwise
     public void SetFlag(Single value)
     {
-        FlagHandler.Instance.SetFlag(flagName, value);
+        FlagHandler.Instance.SetFlag(flagName, value, writable);
     }
 }

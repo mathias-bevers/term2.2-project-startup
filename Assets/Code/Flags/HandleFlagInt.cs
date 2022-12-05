@@ -21,6 +21,6 @@ public class HandleFlagInt : HandleFlagBase
 
     public void SetFlag(int value)
     {
-        FlagHandler.Instance.SetFlag(flagName, value);
+        FlagHandler.Instance.SetFlag(flagName, value, writable);
     }
 }

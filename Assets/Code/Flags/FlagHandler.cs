@@ -24,6 +24,7 @@ public class FlagHandler : Singleton<FlagHandler>
         List<string> lines = new List<string>();
         foreach(FlagBase flagBase in flags.Values)
         {
+            if (!flagBase.writable) continue;
             string flag = flagBase.flag;
             if (flagBase.GetType() == typeof(IntFlag)) lines.Add(string.Concat(flag, ":INT:", ((IntFlag)flagBase).value));
             else if (flagBase.GetType() == typeof(FloatFlag)) lines.Add(string.Concat(flag, ":FLOAT:", ((FloatFlag)flagBase).value));
@@ -131,31 +132,31 @@ public class FlagHandler : Singleton<FlagHandler>
         return ((BoolFlag)flagBase).value;
     }
     
-    public void SetFlag(string flag, float value)
+    public void SetFlag(string flag, float value, bool writable)
     {
         flag = SanitzeFlag(flag);
-        if (!flags.ContainsKey(flag)) flags.Add(flag, new FloatFlag(flag, value.ToString()));
+        if (!flags.ContainsKey(flag)) flags.Add(flag, new FloatFlag(flag, value.ToString(), writable));
         else ((FloatFlag)flags[flag]).value = value;
     }
 
-    public void SetFlag(string flag, int value)
+    public void SetFlag(string flag, int value, bool writable)
     {
         flag = SanitzeFlag(flag);
-        if (!flags.ContainsKey(flag)) flags.Add(flag, new IntFlag(flag, value.ToString()));
+        if (!flags.ContainsKey(flag)) flags.Add(flag, new IntFlag(flag, value.ToString(), writable));
         else ((IntFlag)flags[flag]).value = value;
     }
 
-    public void SetFlag(string flag, bool value)
+    public void SetFlag(string flag, bool value, bool writable)
     {
         flag = SanitzeFlag(flag);
-        if (!flags.ContainsKey(flag)) flags.Add(flag, new BoolFlag(flag, value.ToString()));
+        if (!flags.ContainsKey(flag)) flags.Add(flag, new BoolFlag(flag, value.ToString(), writable));
         else ((BoolFlag)flags[flag]).value = value;
     }
 
-    public void SetFlag(string flag, string value)
+    public void SetFlag(string flag, string value, bool writable)
     {
         flag = SanitzeFlag(flag);
-        if (!flags.ContainsKey(flag)) flags.Add(flag, new StringFlag(flag, value));
+        if (!flags.ContainsKey(flag)) flags.Add(flag, new StringFlag(flag, value, writable));
         else ((StringFlag)flags[flag]).value = value;
     }
 
@@ -178,17 +179,19 @@ public class FlagHandler : Singleton<FlagHandler>
 public class FlagBase
 {
     public string flag;
+    public bool writable;
 
-    public FlagBase(string flag)
+    public FlagBase(string flag, bool writable)
     {
         this.flag = flag;
+        this.writable = writable;
     }
 }
 
 public class FloatFlag : FlagBase
 {
     public float value;
-    public FloatFlag(string flag, string value) : base(flag)
+    public FloatFlag(string flag, string value, bool writable = true) : base(flag, writable)
     {
         this.value = float.Parse(value);
     }
@@ -197,7 +200,7 @@ public class FloatFlag : FlagBase
 public class IntFlag : FlagBase
 {
     public int value;
-    public IntFlag(string flag, string value) : base(flag)
+    public IntFlag(string flag, string value, bool writable = true) : base(flag, writable)
     {
         this.value = int.Parse(value);
     }
@@ -206,7 +209,7 @@ public class IntFlag : FlagBase
 public class BoolFlag : FlagBase
 {
     public bool value;
-    public BoolFlag(string flag, string value) : base(flag)
+    public BoolFlag(string flag, string value, bool writable = true) : base(flag, writable)
     {
         this.value = bool.Parse(value);
     }
@@ -215,7 +218,7 @@ public class BoolFlag : FlagBase
 public class StringFlag : FlagBase
 {
     public string value;
-    public StringFlag(string flag, string value) : base(flag)
+    public StringFlag(string flag, string value, bool writable = true) : base(flag, writable)
     {
         this.value = value;
     }

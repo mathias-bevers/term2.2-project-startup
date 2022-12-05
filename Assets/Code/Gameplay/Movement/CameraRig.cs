@@ -31,6 +31,8 @@ public class CameraRig : MonoBehaviour
     [SerializeField] LayerMask cameraCollidesWith;
     [HideInInspector] public Vector3 forward => transform.forward;
 
+    [SerializeField] float followSpeed = 50;
+
     public LayerMask collidesLayerMask { get => cameraCollidesWith; set => cameraCollidesWith = value; }
 
     float currentDistance = 10;
@@ -101,7 +103,7 @@ public class CameraRig : MonoBehaviour
     void HandleFollow()
     {
         if (followPoint == null) return;
-        transform.position = Vector3.Slerp(transform.position, followPoint.position, 50 * Time.deltaTime);
+        transform.position = Vector3.Slerp(transform.position, followPoint.position, followSpeed * Time.deltaTime);
         //transform.position = followPoint.position;
     }
 #if UNITY_EDITOR
