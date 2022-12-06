@@ -182,6 +182,11 @@ PrefabInstance:
       propertyPath: interactableWith.Array.data[1]
       value: TreasureChest
       objectReference: {fileID: 0}
+    - target: {fileID: 1929230616797688278, guid: f471a9dbf54b0004abc54899d58db0a8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2961309474781590223, guid: f471a9dbf54b0004abc54899d58db0a8,
         type: 3}
       propertyPath: maxOxygen
@@ -331,7 +336,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _settings
       value: 
-      objectReference: {fileID: 11400000, guid: 7e14c62903c4a0f44a446f8ee940942d,
+      objectReference: {fileID: 11400000, guid: d95f5d609ceaa5c4bb80de597556a97b,
         type: 2}
     m_RemovedComponents:
     - {fileID: 8170256149282086978, guid: f471a9dbf54b0004abc54899d58db0a8, type: 3}

@@ -1,24 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e713116353344ff428f93df46ca7ab8b, type: 3}
-  m_Name: Keyboard&Mouse
-  m_EditorClassIdentifier: 
-  _horizontalMovement: Horizontal
-  _verticalMovement: Vertical
-  _horizontalCamera: Mouse X
-  _verticalCamera: Mouse Y
-  _jumpInput: JumpKeyboard
-  _diveInput: DiveKeyboard
-  _actionInput1: HarpoonKeyboard
-  _actionInput2: HarpoonShootKeyboard
-  _axisHorizontal: AxisHorizontalKeyboard
-  _axisVertical: AxisHorizontalKeyboard
+version https://git-lfs.github.com/spec/v1
+oid sha256:94ef46d0628f416eda0d90ec44740e173c2aa101b1849063dccc848a5300992e
+size 754

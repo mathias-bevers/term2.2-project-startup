@@ -17,6 +17,9 @@ namespace Code
         private bool hasTicked = false;
         private bool hasStarted = false;
 
+        bool _died = false;
+        public bool hasDied { get => _died; }
+
         private void Start()
         {
             _interactionHandler = GetComponent<InteractionHandler>();
@@ -55,6 +58,7 @@ namespace Code
 
         public void KillEntity()
         {
+            _died = true;
             OnDeath();
         }
 
