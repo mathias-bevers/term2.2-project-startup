@@ -5598,6 +5598,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Oxigen canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7661435991360554248, guid: 56b47cdcfd60a4a4a8300fce880d3786,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7661435991360554252, guid: 56b47cdcfd60a4a4a8300fce880d3786,
         type: 3}
       propertyPath: m_Pivot.x
