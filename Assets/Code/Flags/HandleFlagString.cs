@@ -19,6 +19,6 @@ public class HandleFlagString : HandleFlagBase
 
     public void SetFlag(string value)
     {
-        FlagHandler.Instance.SetFlag(flagName, value);
+        FlagHandler.Instance.SetFlag(flagName, value, writable);
     }
 }

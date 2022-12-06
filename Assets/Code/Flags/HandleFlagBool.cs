@@ -20,6 +20,6 @@ public class HandleFlagBool : HandleFlagBase
 
     public void SetFlag(bool value)
     {
-        FlagHandler.Instance.SetFlag(flagName, value);
+        FlagHandler.Instance.SetFlag(flagName, value, writable);
     }
 }

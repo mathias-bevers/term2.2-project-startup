@@ -43,12 +43,15 @@ public class InputModule : MonoBehaviour
         return vec;
     }
 
-    public bool OnButtonDown(InputType inputType) => Input.GetButtonDown(FromInputType(inputType));
-    public bool OnButton(InputType inputType) => Input.GetButton(FromInputType(inputType));
-    public bool OnButtonUp(InputType inputType) => Input.GetButtonUp(FromInputType(inputType));
 
-    public float GetAxisRaw(InputType inputType) => Input.GetAxisRaw(FromInputType(inputType));
-    public float GetAxis(InputType inputType) => Input.GetAxis(FromInputType(inputType));
+    public bool IsDown(InputSettingsEnum setting) => enabled ? _settings.IsDown(setting) : false;
+
+    public bool OnButtonDown(InputType inputType) => enabled ? Input.GetButtonDown(FromInputType(inputType)) : false;
+    public bool OnButton(InputType inputType) => enabled ? Input.GetButton(FromInputType(inputType)) : false;
+    public bool OnButtonUp(InputType inputType) => enabled ? Input.GetButtonUp(FromInputType(inputType)) : false;
+
+    public float GetAxisRaw(InputType inputType) => enabled ? Input.GetAxisRaw(FromInputType(inputType)) : 0;
+    public float GetAxis(InputType inputType) => enabled ? Input.GetAxis(FromInputType(inputType)) : 0;
 
     protected void Update()
     {
