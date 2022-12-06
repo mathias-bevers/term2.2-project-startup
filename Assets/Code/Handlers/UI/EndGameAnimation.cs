@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EndGameAnimation : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] Canvas[] canvasses;
+
     void Start()
     {
-        
+        for(int i = 0; i < canvasses.Length; i++)
+        {
+            canvasses[i].enabled = false;
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         

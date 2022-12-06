@@ -2988,6 +2988,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1128302529, guid: 8d6ddbda09a3fc843aa203b884842c74, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 6.8252144
+      objectReference: {fileID: 0}
+    - target: {fileID: 1128302529, guid: 8d6ddbda09a3fc843aa203b884842c74, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.5239
+      objectReference: {fileID: 0}
     - target: {fileID: 3844327746104818791, guid: 8d6ddbda09a3fc843aa203b884842c74,
         type: 3}
       propertyPath: m_RootOrder
@@ -3228,6 +3236,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2fa37b2ce7422147858a526699790e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasses:
+  - {fileID: 1228085200}
+  - {fileID: 181006574}
 --- !u!1001 &769193349
 PrefabInstance:
   m_ObjectHideFlags: 0
