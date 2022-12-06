@@ -2221,6 +2221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flagName: test
+  writable: 0
   defaultValue: 0.25
   floatEvent:
     m_PersistentCalls:
