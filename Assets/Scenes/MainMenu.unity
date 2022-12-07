@@ -930,7 +930,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &277027583
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3249,6 +3249,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7614653182637489612}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1066129166 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7614653181874432705, guid: b600f57dc7330cd4bb66d0e0f5bf0979,
+    type: 3}
+  m_PrefabInstance: {fileID: 7614653182637489612}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066129163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1089371358 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4851211818219426568, guid: 53f91c19f62fee24ca8e2180d7367a16,
@@ -6366,6 +6378,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7614653181874432705, guid: b600f57dc7330cd4bb66d0e0f5bf0979,
+        type: 3}
+      propertyPath: m_IsOn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7614653181874432706, guid: b600f57dc7330cd4bb66d0e0f5bf0979,
+        type: 3}
+      propertyPath: flagName
+      value: SplitScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 7614653181874432706, guid: b600f57dc7330cd4bb66d0e0f5bf0979,
+        type: 3}
+      propertyPath: boolEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1066129166}
+    - target: {fileID: 7614653181874432706, guid: b600f57dc7330cd4bb66d0e0f5bf0979,
+        type: 3}
+      propertyPath: boolEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_isOn
+      objectReference: {fileID: 0}
+    - target: {fileID: 7614653181874432706, guid: b600f57dc7330cd4bb66d0e0f5bf0979,
+        type: 3}
+      propertyPath: boolEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.UI.Toggle, UnityEngine.UI
       objectReference: {fileID: 0}
     - target: {fileID: 7614653181874432711, guid: b600f57dc7330cd4bb66d0e0f5bf0979,
         type: 3}
