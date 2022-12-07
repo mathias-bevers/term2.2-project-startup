@@ -9,10 +9,10 @@ namespace Code.Interaction
 
         public void OnHover(InteractionHandler handler)
         {
-            Debug.Log($"Hovering {name}");
-            //TODO: implement
+            OnHover[] onHovers = FindObjectsOfType<OnHover>(true);
+            foreach(OnHover onHover in onHovers)
+                onHover.gameObject.SetActive(true);
         }
-
         protected virtual void Pickup(InteractionHandler handler) { }
     }
 }

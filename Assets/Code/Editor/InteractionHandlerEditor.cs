@@ -28,8 +28,11 @@ public class InteractionHandlerEditor : Editor
 
     public override void OnInspectorGUI()
     {
+        EditorGUILayout.HelpBox("Settings", MessageType.None);
         EditorGUILayout.PropertyField(reachField);
-
+        EditorGUILayout.Space(5);
+        EditorGUILayout.HelpBox("Can Pickup", MessageType.None);
+        EditorGUILayout.BeginHorizontal();
         bool hasAll = CheckHasAll();
         if(hasAll !=  EditorGUILayout.Toggle(hasAll, GUILayout.Width(17)))
         {
@@ -39,6 +42,8 @@ public class InteractionHandlerEditor : Editor
                 foreach (Type type in types)
                     self.interactableWith.Add(type.Name);
         }
+        EditorGUILayout.LabelField("Select All");
+        EditorGUILayout.EndHorizontal();
 
         foreach (Type type in types)
         {
@@ -51,8 +56,19 @@ public class InteractionHandlerEditor : Editor
             EditorGUILayout.HelpBox(type.Name, MessageType.None, true);
             GUILayout.EndHorizontal();
         }
+        EditorGUILayout.Space(5);
+        if (EditorApplication.isPlaying)
+        {
+            EditorGUILayout.HelpBox("Items in Inventory", MessageType.None);
+            foreach (Pickupable p in self.inventory.getInventory)
+            {
+                EditorGUILayout.HelpBox(p.GetType().Name, MessageType.None, true);
+            }
 
-       
+        }
+
+
+
         serializedObject.ApplyModifiedProperties();
 
         if (GUI.changed)

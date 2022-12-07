@@ -16,14 +16,15 @@ namespace Code
 
 		public void Interact(InteractionHandler handler)
 		{
-            if (handler.inventory.HasType<Key>())
+			Debug.Log("Interract");
+            if (!handler.inventory.HasType<Key>())
             {
 				Debug.LogWarning($"{handler.gameObject.name} doesn't have a key to open this chest.");
 				return;
             }
 
             ++keysUsed;
-			handler.inventory.Remove<Pickupable>();
+			handler.inventory.Remove<Key>();
 			onAddKey?.Invoke(keysUsed);
 
 			if (keysUsed < keysNeeded) { return; }

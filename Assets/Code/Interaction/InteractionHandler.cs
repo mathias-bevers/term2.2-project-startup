@@ -14,15 +14,10 @@ namespace Code.Interaction
         public Inventory inventory { get; private set; }
 
         private ControlableEntity controlableEntity;
-        private Transform cachedTransform;
 
         private void Awake()
         {
-            cachedTransform = transform;
             controlableEntity = GetComponent<ControlableEntity>();
-
-            if (controlableEntity.GetType() != typeof(Survivor)) { return; }
-
             inventory = new Inventory();
         }
 

@@ -30,8 +30,6 @@ public class Survivor : ControlableEntity
 
     InteractionHandler interaction;
 
-
-
     Killer killer = null;
 
     protected override void OnStart()
@@ -58,7 +56,6 @@ public class Survivor : ControlableEntity
     public void SetGrabbedTarget(Killer killer)
     {
         movementModule.enabled = false;
-        //inputModule.enabled = false;
         interaction.enabled = false;
         eateth = true;
         oldCamDistance = cameraRig.setMaxCamDistance;
@@ -74,9 +71,7 @@ public class Survivor : ControlableEntity
     public void SetUngrabbedTarget(Killer killer)
     {
         bloodTimer = timeForBleed;
-        // bleed.enabled = false;
         movementModule.enabled = true;
-        //inputModule.enabled = true;
         interaction.enabled = true;
         eateth = false;
         cameraRig.setMaxCamDistance = oldCamDistance;
@@ -96,6 +91,12 @@ public class Survivor : ControlableEntity
     protected override void Tick()
     {
         base.Tick();
+        Bleeding();
+        SmoothAnimation();
+    }
+
+    void Bleeding()
+    {
         if (bloodTimer >= 0)
         {
             bloodTimer -= Time.deltaTime;
@@ -104,11 +105,10 @@ public class Survivor : ControlableEntity
                 bleed.enabled = false;
             }
         }
+    }
 
-
-
-
-       
+    void SmoothAnimation()
+    {
         xLevel = 0;
         if (getTransform.position.y < WaterHandler.Instance.waterLevel - hoverUnderWater - 1)
         {
@@ -128,7 +128,6 @@ public class Survivor : ControlableEntity
 
         playerModel.localRotation = Quaternion.Euler(smoothXLevel, 0, 0);
     }
-
 
     protected override void OnDeath()
     {

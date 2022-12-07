@@ -7,7 +7,9 @@ namespace Code.Interaction
 {
     public class Inventory
     {
-        private List<Pickupable> inventory = new();
+        public List<Pickupable> getInventory { get => inventory; }
+
+        private List<Pickupable> inventory = new List<Pickupable>();
         private string previousOutput = string.Empty;
 
         public void Add(Pickupable item)
@@ -51,7 +53,7 @@ namespace Code.Interaction
         /// <typeparam name="T">Type of <see cref="Pickupable" /> to remove</typeparam>
         public Pickupable Remove<T>() where T : Pickupable
         {
-            Pickupable toRemove = inventory.Find(item => item.GetType() == typeof(T));
+            Pickupable toRemove = inventory.Find(item => item.GetType().Name == typeof(T).Name);
 
             if (toRemove == null) { return null; }
 
@@ -59,13 +61,13 @@ namespace Code.Interaction
             return toRemove;
         }
 
-        public bool HasType<T>() where T : Pickupable { return inventory.Any(pickupable => pickupable.GetType() == typeof(T)); }
+        public bool HasType<T>() where T : Pickupable { return inventory.Any(pickupable => pickupable.GetType().Name == typeof(T).Name); }
 
         public bool HasType<T>(T type) where T : Pickupable
         {
             if (inventory == null) { Debug.Break(); }
 
-            return inventory.Any(pickupable => pickupable.GetType() == type.GetType());
+            return inventory.Any(pickupable => pickupable.GetType().Name == type.GetType().Name);
         }
 
         public void Drop<T>(Vector3 dropPoint) where T : Pickupable
