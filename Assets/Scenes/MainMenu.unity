@@ -6391,6 +6391,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7614653181874432706, guid: b600f57dc7330cd4bb66d0e0f5bf0979,
         type: 3}
+      propertyPath: defaultValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7614653181874432706, guid: b600f57dc7330cd4bb66d0e0f5bf0979,
+        type: 3}
       propertyPath: boolEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1066129166}
