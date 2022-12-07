@@ -15,8 +15,6 @@ public class MainMenu : PanelGroupHandler
         //SceneManager.UnloadSceneAsync("MainMenu");
         SceneManager.LoadScene("Map_1", LoadSceneMode.Single);
         //StartCoroutine(StartupGame());
-
-
     }
 
 

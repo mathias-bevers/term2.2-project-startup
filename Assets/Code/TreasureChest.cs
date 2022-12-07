@@ -1,6 +1,7 @@
 ﻿using System;
 using Code.Interaction;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Code
 {
@@ -9,6 +10,9 @@ namespace Code
 		[SerializeField, PlusMinus] private int keysNeeded = 3;
 
 		private int keysUsed = 0;
+
+		[SerializeField] UnityEvent onCompletion;
+		[SerializeField] UnityEvent<int> onAddKey;
 
 		public void Interact(InteractionHandler handler)
 		{
@@ -20,10 +24,12 @@ namespace Code
 
             ++keysUsed;
 			handler.inventory.Remove<Pickupable>();
+			onAddKey?.Invoke(keysUsed);
 
 			if (keysUsed < keysNeeded) { return; }
 
 			Open();
+			onCompletion?.Invoke();
 		}
 
         public void OnHover(InteractionHandler handler)
