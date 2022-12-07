@@ -16,7 +16,6 @@ namespace Code
 
 		public void Interact(InteractionHandler handler)
 		{
-			Debug.Log("Interract");
             if (!handler.inventory.HasType<Key>())
             {
 				Debug.LogWarning($"{handler.gameObject.name} doesn't have a key to open this chest.");
@@ -35,9 +34,12 @@ namespace Code
 
         public void OnHover(InteractionHandler handler)
         {
-            //TODO: implement
+			OnHover[] hovers = FindObjectsOfType<OnHover>(true);
+			foreach (OnHover hover in hovers) {
+				hover.gameObject.SetActive(true);
+					}
         }
 
-		private void Open() { throw new NotImplementedException(); }
+		private void Open() { onCompletion?.Invoke(); }
 	}
 }
