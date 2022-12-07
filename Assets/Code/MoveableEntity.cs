@@ -9,9 +9,8 @@ namespace Code
 	{
         CharacterController controller;
         public CharacterController getController { get => controller; set => controller = value; }
-        bool hasCached = false;
         private Transform cachedTransform;
-        public Transform getTransform { get { if (!hasCached) { hasCached = true; cachedTransform = controller.transform; } return cachedTransform; } }
+        public Transform getTransform { get => cachedTransform; }
         internal MovementModule movementModule;
         public Vector3 getPosition { get => getTransform.position; }
 
@@ -19,6 +18,7 @@ namespace Code
         protected override void OnStart()
         {
             controller = GetComponent<CharacterController>();
+            cachedTransform = controller.transform;
             movementModule = GetComponent<MovementModule>();
             movementModule.setController = controller;
             base.OnStart();
