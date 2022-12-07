@@ -9,10 +9,11 @@ namespace Code
 	{
         CharacterController controller;
         public CharacterController getController { get => controller; set => controller = value; }
-        public Transform getTransform { get => controller.transform; }
+        bool hasCached = false;
+        private Transform cachedTransform;
+        public Transform getTransform { get { if (!hasCached) { hasCached = true; cachedTransform = controller.transform; } return cachedTransform; } }
         internal MovementModule movementModule;
-        public Vector3 getPosition { get => controller.transform.position; }
-
+        public Vector3 getPosition { get => getTransform.position; }
 
 
         protected override void OnStart()

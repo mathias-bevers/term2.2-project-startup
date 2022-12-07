@@ -67,6 +67,7 @@ public class Survivor : ControlableEntity
         cameraRig.setMaxCamDistance = 10;
         bleed.enabled = true;
         getController.enabled = false;
+        getInteractionHandler.inventory.Drop<Key>(getTransform.position);
         this.killer = killer;
     }
 
@@ -82,6 +83,7 @@ public class Survivor : ControlableEntity
         cameraRig.collidesLayerMask = oldLayerMask;
         getTransform.rotation = Quaternion.identity;
         getController.enabled = true;
+        
         this.killer = null;
     }
 
