@@ -473,7 +473,6 @@ GameObject:
   - component: {fileID: 1874787528592972152}
   - component: {fileID: 3103415570372181013}
   - component: {fileID: 6880974236689920620}
-  - component: {fileID: 4250881206518393817}
   m_Layer: 0
   m_Name: SeaWeed
   m_TagString: Untagged
@@ -560,19 +559,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &4250881206518393817
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3197499153811450731}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.4073219, z: 1}
-  m_Center: {x: 0, y: 0.69244695, z: 0}
 --- !u!1 &3862887297381241286
 GameObject:
   m_ObjectHideFlags: 0

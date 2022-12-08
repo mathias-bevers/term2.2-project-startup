@@ -265,7 +265,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1985209710911787693}
   - component: {fileID: 6842750658896214457}
-  - component: {fileID: 3936609728061937124}
   - component: {fileID: -5917856760325046141}
   m_Layer: 0
   m_Name: Seaweed2
@@ -311,19 +310,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &3936609728061937124
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3303311634958344382}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.7379806, y: 1.4658122, z: 1}
-  m_Center: {x: -0.1310097, y: 0.669606, z: 0}
 --- !u!23 &-5917856760325046141
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -344,7 +330,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 3818440949466118321, guid: 7f34db7641ac0bd4ab34a5e5d63efeac, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
