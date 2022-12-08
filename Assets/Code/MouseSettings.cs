@@ -1,15 +1,3 @@
-using UnityEngine;
-
-[System.Serializable]
-public struct MouseSettings 
-{
-    [SerializeField] float _sensitivityX;
-    [SerializeField] float _sensitivityY;
-    [SerializeField] bool _invertX;
-    [SerializeField] bool _invertY;
-
-    public float sensitivityX { get { return _sensitivityX; } }
-    public float sensitivityY { get { return _sensitivityY; } }
-    public float invertX { get { return _invertX ? -1 : 1;} }
-    public float invertY { get { return _invertY ? -1 : 1; } }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:6ce4ed1618ff094a7d3c36c0111db48338bd156109fec075411f966154c7f2e8
+size 619
