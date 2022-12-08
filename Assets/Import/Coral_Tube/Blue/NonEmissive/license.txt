@@ -1,0 +1,11 @@
+Model Information:
+* title:	Coral Blue Non Emissive
+* source:	https://sketchfab.com/3d-models/coral-blue-non-emissive-447ca6d41ba944668b2080d439be3fec
+* author:	ambereissink (https://sketchfab.com/ambereissink)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Coral Blue Non Emissive" (https://sketchfab.com/3d-models/coral-blue-non-emissive-447ca6d41ba944668b2080d439be3fec) by ambereissink (https://sketchfab.com/ambereissink) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
