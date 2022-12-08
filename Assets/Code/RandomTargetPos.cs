@@ -1,12 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class RandomTargetPos : MonoBehaviour
-{
-    private void Update()
-    {
-        Random.InitState(Random.Range(0, 10000000));
-        transform.position = new Vector3(Random.Range(-400, 400), Random.Range(0, WaterHandler.Instance.waterLevel), Random.Range(-400, 400));
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:1e0a1b32420442e23795ab5dbc209436fef7c8c35023100f34ddc6944c6d70b8
+size 363
