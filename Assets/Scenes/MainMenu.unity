@@ -3699,7 +3699,7 @@ PrefabInstance:
     - target: {fileID: 4851211818219426569, guid: 53f91c19f62fee24ca8e2180d7367a16,
         type: 3}
       propertyPath: m_Text
-      value: Wa'oh game!
+      value: Aquaphobia
       objectReference: {fileID: 0}
     - target: {fileID: 4851211818219426571, guid: 53f91c19f62fee24ca8e2180d7367a16,
         type: 3}

@@ -8,8 +8,6 @@ namespace FPSepController
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            PlusMinusAttribute pma = attribute as PlusMinusAttribute;
-
             if (property.propertyType != SerializedPropertyType.Integer)
             {
                 EditorGUI.HelpBox(position, "This attribute only supports ints", MessageType.Error);
